@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Projektübersicht
 
-**Projektname:** Splitflap (Repo: `hugo-theme-splitflap`)
+**Projektname:** Splitflap (Repo: `splitflap`)
 **Beschreibung:** Eigenständiges Open-Source-Hugo-Theme — Split-Flap-Display-Landing-Page, Ayu-Farbsystem, Monaspace-Typografie. Extrahiert aus dem Monorepo `hnsstrk.de` (mit vollständiger Git-Historie via `git filter-repo`).
 **Lizenz:** MIT (eigener Code) — gebündelte Drittanbieter-Komponenten siehe `THIRD-PARTY-LICENSES.md`
 **Konsument:** hnsstrk.de bindet dieses Theme künftig als Git-Submodule unter `themes/splitflap` ein.
@@ -26,14 +26,14 @@ Das Theme allein baut nicht — es braucht eine Site. Test-Build gegen hnsstrk.d
 ```bash
 hugo --source /Users/hnsstrk/Repositories/hnsstrk.de \
      --themesDir /Users/hnsstrk/Repositories \
-     --theme hugo-theme-splitflap \
+     --theme splitflap \
      --destination /tmp/splitflap-build-test --minify
 ```
 
 Sobald `exampleSite/` existiert:
 
 ```bash
-hugo server --source exampleSite --themesDir ../.. --theme hugo-theme-splitflap
+hugo server --source exampleSite --themesDir ../.. --theme splitflap
 ```
 
 ## Architektur
@@ -79,8 +79,8 @@ Die Entkopplung site-spezifischer Werte ist abgeschlossen (2026-06-10). Eingefü
 
 ## Offene Aufgaben bis zur Veröffentlichung
 
-1. **hnsstrk.de umstellen:** `themes/hnsstrk` entfernen, Submodule einbinden, `theme = "hugo-theme-splitflap"` setzen, Server-Build-Skript `build-hnsstrk` um `git submodule update --init` ergänzen — **vorher auf dem Server testen, sonst deployt die Seite ohne Theme**. Die nötigen Params sind in der hugo.toml von hnsstrk.de bereits vorbereitet (board.messages, contentLicense, avatar, ogLocale).
-2. GitHub-Repo `hnsstrk/hugo-theme-splitflap` anlegen (gemeinsam mit dem User)
+1. **hnsstrk.de umstellen:** `themes/hnsstrk` entfernen, Submodule einbinden, `theme = "splitflap"` setzen, Server-Build-Skript `build-hnsstrk` um `git submodule update --init` ergänzen — **vorher auf dem Server testen, sonst deployt die Seite ohne Theme**. Die nötigen Params sind in der hugo.toml von hnsstrk.de bereits vorbereitet (board.messages, contentLicense, avatar, ogLocale).
+2. GitHub-Repo `hnsstrk/splitflap` anlegen (gemeinsam mit dem User)
 
 ## Projektdokumentation
 

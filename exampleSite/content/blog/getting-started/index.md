@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with hugo-theme-splitflap"
+title: "Getting Started with splitflap"
 date: 2024-03-15
 draft: false
 description: "A walkthrough of the theme's main features: split-flap board, color themes, shortcodes, and content sections."
@@ -9,7 +9,7 @@ tags: ["Hugo", "Theme", "Setup"]
 # toc: true
 ---
 
-Welcome to **hugo-theme-splitflap** — a Hugo theme centered on a split-flap display landing page, the Ayu color system, and the Monaspace typeface family.
+Welcome to **splitflap** — a Hugo theme centered on a split-flap display landing page, the Ayu color system, and the Monaspace typeface family.
 
 <!--more-->
 

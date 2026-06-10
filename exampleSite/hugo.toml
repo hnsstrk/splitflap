@@ -9,7 +9,7 @@ defaultContentLanguage = "en"
 title = "Splitflap Demo"
 
 # The theme name must match the directory name inside /themes/
-theme = "hugo-theme-splitflap"
+theme = "splitflap"
 
 enableRobotsTXT = true
 
@@ -18,7 +18,7 @@ enableRobotsTXT = true
 # ---------------------------------------------------------------------------
 [params]
   # Short site description — used in <meta name="description"> and footer tagline.
-  description = "A demonstration site for the hugo-theme-splitflap."
+  description = "A demonstration site for the splitflap."
 
   # Author name — displayed in the about page avatar alt text and footer.
   author = "Demo Author"

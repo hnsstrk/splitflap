@@ -33,7 +33,7 @@ editorial content style, Ayu colors and Monaspace typography.
 As a Git submodule (recommended):
 
 ```bash
-git submodule add https://github.com/hnsstrk/hugo-theme-splitflap.git themes/splitflap
+git submodule add https://github.com/hnsstrk/splitflap.git themes/splitflap
 echo 'theme = "splitflap"' >> hugo.toml
 ```
 

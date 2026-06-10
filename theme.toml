@@ -1,8 +1,8 @@
 name = "Splitflap"
 license = "MIT"
-licenselink = "https://github.com/hnsstrk/hugo-theme-splitflap/blob/main/LICENSE"
+licenselink = "https://github.com/hnsstrk/splitflap/blob/main/LICENSE"
 description = "A split-flap display theme with Ayu colors and Monaspace typography."
-homepage = "https://github.com/hnsstrk/hugo-theme-splitflap"
+homepage = "https://github.com/hnsstrk/splitflap"
 demosite = "https://hnsstrk.de/"
 tags = ["responsive", "dark-mode", "monospace", "split-flap", "ayu", "minimal", "personal"]
 features = ["3 color themes (light/mirage/dark)", "split-flap display", "Monaspace fonts", "Nerd Font icons"]

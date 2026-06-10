@@ -1,13 +1,13 @@
 ---
 title: "About"
-description: "A demo persona for the hugo-theme-splitflap example site."
+description: "A demo persona for the splitflap example site."
 date: 2024-01-01
 layout: "about"
 ---
 
 Hello — I am a placeholder for the About page.
 
-This site is powered by **hugo-theme-splitflap**, a Hugo theme built around a split-flap display landing page, the Ayu color system, and the Monaspace type family.
+This site is powered by **splitflap**, a Hugo theme built around a split-flap display landing page, the Ayu color system, and the Monaspace type family.
 
 Replace this content in `content/about.md` with your own introduction.
 
