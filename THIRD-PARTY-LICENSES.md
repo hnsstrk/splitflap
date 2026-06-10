@@ -129,12 +129,14 @@ INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
 DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
+
 ---
 
 ## Mermaid.js (MIT)
 
-Applies to `assets/js/mermaid.min.js` (bundled, minified — the license banner
-is stripped by minification, hence reproduced here).
+Applies to `assets/js/mermaid.min.js` (bundled version: 11.14.0, minified —
+the license banner is stripped by minification, hence reproduced here; the
+copyright line below is verbatim from the upstream LICENSE file).
 
 The MIT License (MIT)
 

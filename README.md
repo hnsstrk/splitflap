@@ -12,7 +12,8 @@ editorial content style, Ayu colors and Monaspace typography.
   rotation and keyboard controls (adapted from
   [FlipOff](https://github.com/magnum6actual/flipoff))
 - **Three color themes** — Ayu Light, Mirage and Dark, switchable at runtime,
-  with system-preference detection and FOUC-free loading
+  with system-preference detection (light default renders first; the stored
+  theme is applied on `DOMContentLoaded`)
 - **Monaspace typography** — all five Monaspace variants bundled as variable
   fonts, plus Nerd Font icon variants (no SVG icons)
 - **Mermaid diagrams** — self-hosted, loaded only on pages that use them,

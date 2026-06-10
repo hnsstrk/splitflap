@@ -72,6 +72,9 @@ Nur geladen, wenn die Seite Mermaid-Codeblöcke enthält (Store-Flag `hasMermaid
 1. **Entkopplung** (Site-spezifisches konfigurierbar machen):
    - `assets/js/constants.js` — Board-Messages (enthält noch `@hnsstrk`) → über Site-Params injizieren
    - `layouts/_default/about.html` — Avatar-Pfad und alt-Text hardcoded → `site.Params`
+   - `layouts/_default/baseof.html` — Footer-Lizenzhinweis (`CC BY 4.0` + `/licenses/`) hardcoded → `site.Params.contentLicense` / `site.Params.licensesUrl`
+   - `layouts/partials/head.html` — `og:locale` hardcoded auf `de_DE` → aus Site-Sprache ableiten (Achtung: og-Format ist `de_DE`, Hugo-Locale ist `de` — Mapping nötig)
+   - `static/images/og-default.svg/.png` — enthalten persönlichen Content (Name, Tagline) und referenzieren Google Fonts → generischen Platzhalter erstellen oder entfernen und im README dokumentieren
 2. **`exampleSite/`** mit Demo-Content und vollständig kommentierter `hugo.toml`
 3. **Screenshots** für die Hugo-Themes-Galerie: `images/screenshot.png` (1500×1000) + `images/tn.png` (900×600)
 4. **hnsstrk.de umstellen:** `themes/hnsstrk` entfernen, Submodule einbinden, Server-Build-Skript `build-hnsstrk` um `git submodule update --init` ergänzen — **vorher auf dem Server testen, sonst deployt die Seite ohne Theme**
