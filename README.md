@@ -52,15 +52,29 @@ theme = "splitflap"
 
 [params]
   description = "Your site description"
-  author = "Your Name"
+  author = "Your Name"          # also used as avatar alt text on the about page
   tagline = "Optional footer tagline"
-  logoPrompt = ">"          # prompt character before the site title
+  logoPrompt = ">"              # prompt character before the site title
+  avatar = "images/avatar.png"  # about-page portrait, relative to static/
+  ogLocale = "de_DE"            # og:locale meta tag (default: de_DE)
+  # ogImage = "images/og.png"   # fallback Open Graph image — provide your own
+  # contentLicense = "CC BY 4.0"      # optional footer license segment
+  # contentLicenseUrl = "/licenses/"  # optional link target for the license
 
-  [params.social]           # rendered in footer + JSON-LD sameAs
+  [params.social]               # rendered in footer + JSON-LD sameAs
     github = "yourhandle"
     mastodon = "@yourhandle"
     # bluesky = "yourhandle"
     # linkedin = "yourhandle"
+
+  # Split-flap board messages on the landing page. Each message is an array
+  # of up to 7 lines, max. 20 characters each (A-Z, 0-9, .,-!?'/: and space).
+  # Omit to get the theme's default demo messages.
+  [params.board]
+    messages = [
+      ['', '', 'HELLO WORLD', '', 'SPLITFLAP', '', ''],
+      ['', '', 'CONFIGURE ME', 'IN HUGO.TOML', '', '', '']
+    ]
 
 [menus]
   [[menus.main]]
@@ -68,10 +82,10 @@ theme = "splitflap"
     url = "/blog/"
     weight = 10
     [menus.main.params]
-      icon = "f02d"         # Nerd Font codepoint
+      icon = "f02d"             # Nerd Font codepoint
 ```
 
-A full reference of all parameters will ship with the `exampleSite/`.
+A fully commented configuration ships with the `exampleSite/`.
 
 ## License
 

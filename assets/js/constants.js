@@ -35,22 +35,27 @@ export function getAccentColors() {
   ];
 }
 
-export const MESSAGES = [
+// Generische Default-Nachrichten für das Theme.
+// Jede Nachricht ist ein Array mit bis zu GRID_ROWS (7) Zeilen;
+// kürzere Arrays sind sicher, da Board._formatToGrid fehlende Zeilen als '' behandelt.
+// Nur Zeichen aus CHARSET erlaubt (Großbuchstaben, Ziffern, .,-!?'/: und Leerzeichen).
+// Maximale Zeilenlänge: GRID_COLS = 20 Zeichen.
+const DEFAULT_MESSAGES = [
   [
     '',
     '',
-    'AI ENTHUSIAST',
+    'SPLITFLAP',
+    'A HUGO THEME',
     '',
-    'MAKER // GAMER',
     '',
     ''
   ],
   [
     '',
     '',
-    'BLATANTLY COPYING',
-    'STACK OVERFLOW',
-    'SINCE 2013',
+    'SPLIT-FLAP DISPLAY',
+    '',
+    'AYU + MONASPACE',
     '',
     ''
   ],
@@ -58,9 +63,36 @@ export const MESSAGES = [
     '',
     '',
     '',
-    '@hnsstrk',
+    'YOUR MESSAGE HERE',
     '',
     '',
     ''
   ]
 ];
+
+// Nachrichten aus der Hugo-Site-Konfiguration lesen (params.board.messages),
+// falls vom Theme-Nutzer gesetzt. Jede Zeile wird normalisiert:
+// String-Konvertierung, Uppercase, Beschneidung auf GRID_COLS Zeichen.
+// Rückfall auf DEFAULT_MESSAGES, wenn kein gültiger Override vorhanden.
+function resolveMessages() {
+  if (
+    typeof window !== 'undefined' &&
+    Array.isArray(window.splitflapMessages) &&
+    window.splitflapMessages.length > 0
+  ) {
+    return window.splitflapMessages.map((msg) => {
+      // Jede Nachricht muss ein Array von Zeilen sein
+      const lines = Array.isArray(msg) ? msg : [msg];
+      // Zeilen normalisieren: String, Uppercase, auf 20 Zeichen kürzen
+      const normalized = lines.map((line) =>
+        String(line).toUpperCase().slice(0, GRID_COLS)
+      );
+      // Auf GRID_ROWS Zeilen auffüllen
+      while (normalized.length < GRID_ROWS) normalized.push('');
+      return normalized.slice(0, GRID_ROWS);
+    });
+  }
+  return DEFAULT_MESSAGES;
+}
+
+export const MESSAGES = resolveMessages();
