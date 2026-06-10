@@ -98,6 +98,9 @@ export class Tile {
 
           // Set the final character directly (skip 3D flip for reliability)
           // Use a brief opacity flash to simulate the flip settle
+          // Hinweis: die folgenden Settle-Timeouts sind bewusst nicht stornierbar —
+          // sie sind kurzlebig (< 2x FLIP_DURATION), laufen erst nach dem Scramble-Interval
+          // und ein erneutes scrambleTo() überschreibt lediglich Styles
           this.frontSpan.textContent = targetChar === ' ' ? '' : targetChar;
 
           // Quick flash effect: brief scale transform

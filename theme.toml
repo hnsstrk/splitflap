@@ -6,8 +6,8 @@ homepage = "https://github.com/hnsstrk/splitflap"
 demosite = "https://hnsstrk.de/"
 tags = ["responsive", "dark-mode", "monospace", "split-flap", "ayu", "minimal", "personal"]
 features = ["3 color themes (light/mirage/dark)", "split-flap display", "Monaspace fonts", "Nerd Font icons"]
-min_version = "0.146.0"
+min_version = "0.158.0"
 
 [author]
-  name = "Hans Jürgen Stark"
+  name = "hnsstrk.de"
   homepage = "https://hnsstrk.de"

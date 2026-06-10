@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Slide indicator to active button position
         if (indicator) {
             const index = THEMES.indexOf(theme);
-            // Each button is 36px wide + 2px gap = 38px offset per step
+            // Konstante gekoppelt an style.css (.theme-switcher button: 36px + 2px Gap).
+            // Bewusst statisch statt offsetLeft-Berechnung: funktioniert auch, wenn der
+            // Switcher unsichtbar ist (Mobile-Dropdown), wo offsetLeft 0 liefern würde.
             indicator.style.transform = `translateX(${index * 38}px)`;
         }
 

@@ -89,7 +89,7 @@ A fully commented configuration ships with the `exampleSite/`.
 
 ## License
 
-[MIT](LICENSE) — © 2026 Hans Jürgen Stark.
+[MIT](LICENSE) — © 2026 [hnsstrk.de](https://hnsstrk.de).
 
 This theme bundles and adapts third-party work. Full license texts in
 [THIRD-PARTY-LICENSES.md](THIRD-PARTY-LICENSES.md):
