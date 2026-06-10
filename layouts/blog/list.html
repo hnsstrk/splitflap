@@ -21,7 +21,7 @@
   {{ end }}
 
   <div class="type-toolrow">
-    <span>{{ len $allPosts }} Einträge · {{ len $yearsUniq }} Jahre</span>
+    <span>{{ len $allPosts }} {{ if eq (len $allPosts) 1 }}Eintrag{{ else }}Einträge{{ end }} · {{ len $yearsUniq }} {{ if eq (len $yearsUniq) 1 }}Jahr{{ else }}Jahre{{ end }}</span>
     <span class="tr-right">
       <a class="tr-link"        href="{{ "/tags/" | relURL }}">Tags</a>
       <a class="tr-link tr-rss" href="{{ "/blog/index.xml" | relURL }}">RSS ↗</a>
