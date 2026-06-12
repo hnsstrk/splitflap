@@ -15,6 +15,7 @@
 
   --border-color: #e8e8e8;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-board: 0 2px 16px rgba(0, 0, 0, 0.08);
 
   /* Ayu Syntax Colors */
   --syntax-tag: #55b4d4;
@@ -63,8 +64,14 @@
   --link-color: #8a5600;
   --link-color-hover: #6a3f00;
 
+  /* Textueller Akzent (AA-konform) — Light dunkelt den Orange-Akzent ab,
+     dunkle Themes nutzen ihren bereits hellen Akzent */
+  --accent-text: #8a5600;
+
   /* Line-height Token (erhöht in dunklen Themes) */
   --line-height-body: 1.6;
+  /* Durchschuss für Fließtext (p, ul, ol) — dunkle Themes brauchen mehr */
+  --line-height-content: 1.8;
 
   /* Fluid Type Scale (Utopia, 320px–1240px, ratio 1.2) */
   --step--2: clamp(0.69rem, 0.65rem + 0.2vw, 0.8rem);
@@ -126,6 +133,7 @@
 
   --border-color: #2b3040;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-board: 0 2px 16px rgba(0, 0, 0, 0.35);
 
   --syntax-tag: #5ccfe6;
   --syntax-func: #ffd173;
@@ -168,7 +176,9 @@
 
   --link-color: var(--accent-primary);
   --link-color-hover: var(--accent-hover);
+  --accent-text: var(--accent-primary);
   --line-height-body: 1.7;
+  --line-height-content: 1.85;
 
   color-scheme: dark;
 }
@@ -188,6 +198,7 @@
 
   --border-color: #1b1f29;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-board: 0 2px 16px rgba(0, 0, 0, 0.55);
 
   --syntax-tag: #39bae6;
   --syntax-func: #ffb454;
@@ -230,7 +241,9 @@
 
   --link-color: var(--accent-primary);
   --link-color-hover: var(--accent-hover);
+  --accent-text: var(--accent-primary);
   --line-height-body: 1.7;
+  --line-height-content: 1.85;
 
   color-scheme: dark;
 }
@@ -335,13 +348,13 @@ h5 + h6 { margin-top: var(--spacing-sm); }
 p {
   color: var(--text-primary);
   font-size: var(--step-0);
-  line-height: 1.8;
+  line-height: var(--line-height-content);
   margin-bottom: var(--spacing-md);
 }
 
 ul, ol {
   font-size: var(--step-0);
-  line-height: 1.8;
+  line-height: var(--line-height-content);
   color: var(--text-primary);
 }
 
@@ -562,80 +575,6 @@ code {
 }
 
 
-/* Hero Section */
-.hero {
-  padding: var(--spacing-xl) 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 70vh;
-}
-
-.hero-tag {
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--spacing-md);
-  display: inline-block;
-}
-
-.hero h1 {
-  font-size: clamp(1.375rem, 0.5rem + 5vw, 4rem);
-  max-width: 800px;
-  margin-bottom: var(--spacing-lg);
-}
-
-.hero p {
-  font-size: var(--step-1);
-  margin-bottom: var(--spacing-lg);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: var(--step--1);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: var(--accent-primary);
-  color: var(--text-on-accent);
-  border: 1px solid var(--accent-primary);
-}
-
-.btn-primary:hover {
-  background-color: var(--accent-hover);
-  color: var(--text-on-accent);
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  text-decoration: none;
-}
-
-.hero-actions {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
 /* Footer */
 .site-footer {
   margin-top: auto;
@@ -727,7 +666,7 @@ code {
 }
 
 .footer-text a {
-  color: var(--accent-primary);
+  color: var(--accent-text);
 }
 .footer-text a:hover {
   color: var(--accent-hover);
@@ -776,7 +715,22 @@ code {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--spacing-sm);
 }
-/* Content nutzt volle Container-Breite */
+/* Fließtext auf lesbare Zeilenlänge begrenzen (~70 Zeichen, konsistent zur
+   .type-lede). Greift auf texttragende Elemente — Code-Blöcke, Tabellen,
+   Bilder und Figures dürfen weiterhin die volle Containerbreite nutzen. */
+.markdown-content > p,
+.markdown-content > ul,
+.markdown-content > ol,
+.markdown-content > dl,
+.markdown-content > blockquote,
+.markdown-content > h1,
+.markdown-content > h2,
+.markdown-content > h3,
+.markdown-content > h4,
+.markdown-content > h5,
+.markdown-content > h6 {
+  max-width: 72ch;
+}
 .markdown-content ul, .markdown-content ol {
   margin-left: var(--spacing-lg);
   margin-bottom: var(--spacing-md);
@@ -880,11 +834,6 @@ code {
   padding: 0;
   margin: 0;
 }
-.grid-2-col {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: var(--spacing-lg);
-}
 .gap-4 { gap: var(--space-s); }
 
 .card {
@@ -947,46 +896,11 @@ code {
 .text-sm {
   font-size: var(--step--1);
 }
-.category-heading {
-  font-family: var(--font-ui);
-  text-transform: uppercase;
-  color: var(--text-primary);
-  letter-spacing: 0.1em;
-  font-size: var(--step--1);
-  margin-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.25rem;
-}
-
-/* Blog Styles */
-.blog-header {
-  margin-bottom: var(--spacing-xl);
-}
-.blog-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  font-weight: 300;
-  color: var(--text-muted);
-  margin-top: var(--spacing-sm);
-}
+/* Meta-Trenner (Single-Header) */
 .meta-separator {
   color: var(--text-muted);
 }
-.blog-footer {
-  margin-top: var(--spacing-xl);
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--border-color);
-}
 
-
-.blog-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-}
 .tag {
   display: inline-flex;
   align-items: center;
@@ -1085,7 +999,7 @@ code {
   border: 2px solid var(--border-color);
   box-shadow:
     0 0 0 4px var(--bg-secondary),
-    0 4px 24px rgba(0, 0, 0, 0.12);
+    var(--shadow-sm);
 }
 
 /* ==========================================================================
@@ -1186,7 +1100,7 @@ code {
 }
 
 .callout-warning .callout-header {
-  color: var(--syntax-keyword);
+  color: var(--accent-text);
   background-color: color-mix(in srgb, var(--syntax-keyword) 10%, var(--bg-primary));
 }
 
@@ -1247,7 +1161,7 @@ code {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   writing-mode: vertical-lr;
   text-orientation: mixed;
   transform: translateY(-50%) rotate(180deg);
@@ -1465,101 +1379,6 @@ code {
   margin-top: 0;
   margin-bottom: var(--spacing-md);
 }
-.related-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.related-list li {
-  margin-bottom: var(--spacing-sm);
-}
-.related-list a {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--border-color);
-}
-.related-list .related-title {
-  color: var(--text-primary);
-  font-family: var(--font-heading);
-  font-weight: 600;
-}
-.related-list time {
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  font-family: var(--font-ui);
-  white-space: nowrap;
-}
-.related-list a:hover .related-title {
-  color: var(--accent-primary);
-}
-
-/* Archive */
-.archive-year {
-  font-size: var(--step-2);
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-primary);
-}
-.archive-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--spacing-lg);
-}
-.archive-list li {
-  display: flex;
-  align-items: baseline;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--border-color);
-}
-.archive-list time {
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  font-family: var(--font-ui);
-  white-space: nowrap;
-  min-width: 6ch;
-}
-.archive-list a {
-  color: var(--text-primary);
-  font-family: var(--font-heading);
-}
-.archive-list a:hover {
-  color: var(--accent-primary);
-}
-
-/* Tag Cloud */
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-}
-.tag-with-count {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3xs);
-  padding: 0.3rem 0.8rem;
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  text-decoration: none;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-}
-.tag-with-count:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-  background-color: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
-  text-decoration: none;
-}
-.tag-count {
-  font-size: var(--step--2);
-  color: var(--text-muted);
-  font-family: var(--font-ui);
-}
 
 /* Featured Image — Blog Single */
 .featured-image {
@@ -1572,50 +1391,5 @@ code {
   display: block;
   width: 100%;
   height: auto;
-}
-
-/* Card Image — Blog List Thumbnail
-   Layouts: left | right | top | bottom
-   Steuerung via Frontmatter: featured_layout (Standard in hugo.toml) */
-
-/* Shared: left/right — Bild neben Text */
-.card-image-left .card-link,
-.card-image-right .card-link {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-md);
-}
-.card-image-right .card-link {
-  flex-direction: row-reverse;
-}
-.card-image--side {
-  flex-shrink: 0;
-  width: clamp(120px, 25%, 250px);
-  height: auto;
-  border-radius: 6px;
-  object-fit: contain;
-}
-.card-image-left .card-text,
-.card-image-right .card-text {
-  flex: 1;
-  min-width: 0;
-}
-
-/* Shared: top/bottom — Bild über/unter Text, volle Breite */
-.card-image--wide {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-.card-image-top .card-image--wide {
-  margin-bottom: var(--spacing-sm);
-}
-.card-image-bottom .card-link {
-  display: flex;
-  flex-direction: column-reverse;
-}
-.card-image-bottom .card-image--wide {
-  margin-top: var(--spacing-sm);
 }
 

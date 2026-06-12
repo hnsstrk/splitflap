@@ -82,10 +82,6 @@ h4:hover .heading-anchor {
     padding: 14px 20px;
   }
 
-  .hero {
-    padding: 36px 16px 28px;
-  }
-
   .accent-segment {
     width: 12px;
     height: 12px;
@@ -104,6 +100,7 @@ h4:hover .heading-anchor {
     top: 100%;
     left: 0;
     right: 0;
+    margin-right: 0;
     background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     padding: var(--spacing-md);
@@ -123,14 +120,6 @@ h4:hover .heading-anchor {
 
   .nav-links a:last-child {
     border-bottom: none;
-  }
-
-  .header-inner {
-    position: relative;
-  }
-
-  .nav-links {
-    margin-right: 0;
   }
 
   /* Theme Switcher: im Hamburger-Dropdown (wird per JS verschoben) */
@@ -193,22 +182,6 @@ h4:hover .heading-anchor {
     padding: 10px 16px;
   }
 
-  .hero-cta {
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    padding: 0 16px;
-  }
-
-  .hero-cta input {
-    width: 100%;
-    border-radius: 8px;
-  }
-
-  .hero-cta button {
-    width: 100%;
-  }
-
   .accent-bar {
     display: none;
   }
@@ -262,16 +235,6 @@ h4:hover .heading-anchor {
   .mermaid {
     padding: var(--spacing-sm);
   }
-
-  /* Card-Image: left/right werden auf kleinen Screens gestapelt */
-  .card-image-left .card-link,
-  .card-image-right .card-link {
-    flex-direction: column;
-  }
-  .card-image--side {
-    width: 100%;
-    height: auto;
-  }
 }
 
 /* Fullscreen mode */
@@ -284,8 +247,7 @@ h4:hover .heading-anchor {
   background: var(--bg-secondary);
 }
 
-:fullscreen .header,
-:fullscreen .hero {
+:fullscreen .header {
   display: none !important;
 }
 
