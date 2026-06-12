@@ -4,6 +4,8 @@ import {
   TOTAL_TRANSITION, getAccentColors
 } from './constants.js';
 
+// Board verwaltet genau eine Instanz pro Seite.
+// destroy() räumt den themechange-Listener und alle laufenden Timer auf.
 export class Board {
   constructor(containerEl) {
     this.cols = GRID_COLS;
@@ -12,6 +14,7 @@ export class Board {
     this.tiles = [];
     this.currentGrid = [];
     this.accentIndex = 0;
+    this._settleTimer = null;
 
     // Build board DOM
     this.boardEl = document.createElement('div');
@@ -47,11 +50,14 @@ export class Board {
     this.rightBar = this._createAccentBar('accent-bar-right');
     this.boardEl.appendChild(this.rightBar);
 
-    // Keyboard hint icon (bottom-left)
-    const hint = document.createElement('div');
+    // Tastaturkürzel-Hinweis-Schaltfläche (unten links).
+    // Als <button> ist sie per Tastatur (Enter/Space) erreichbar ohne zusätzlichen
+    // keydown-Handler — der Browser übersetzt beides automatisch in click-Events.
+    const hint = document.createElement('button');
+    hint.type = 'button';
     hint.className = 'keyboard-hint';
     hint.textContent = 'N';
-    hint.title = 'Keyboard shortcuts';
+    hint.setAttribute('aria-label', 'Tastaturkürzel anzeigen');
     hint.addEventListener('click', (e) => {
       e.stopPropagation();
       const overlay = this.boardEl.querySelector('.shortcuts-overlay');
@@ -72,10 +78,19 @@ export class Board {
     containerEl.appendChild(this.boardEl);
     this._updateAccentColors();
 
-    // Update accent colors when theme changes
-    window.addEventListener('themechange', () => {
-      this._updateAccentColors();
-    });
+    // Listener-Referenz speichern, damit destroy() ihn zuverlässig entfernen kann
+    this._themeChangeHandler = () => this._updateAccentColors();
+    window.addEventListener('themechange', this._themeChangeHandler);
+  }
+
+  // Räumt alle Event-Listener und laufende Transitions-Timer auf.
+  // Aufrufen, wenn die Seite oder die Board-Instanz verworfen wird.
+  destroy() {
+    window.removeEventListener('themechange', this._themeChangeHandler);
+    if (this._settleTimer) {
+      clearTimeout(this._settleTimer);
+      this._settleTimer = null;
+    }
   }
 
   _createAccentBar(extraClass) {
@@ -125,8 +140,10 @@ export class Board {
     // Update grid state
     this.currentGrid = newGrid;
 
-    // Clear transitioning flag after animation completes
-    setTimeout(() => {
+    // Transitioning-Flag nach Ablauf der Animation zurücksetzen.
+    // Referenz in _settleTimer halten, damit destroy() ihn bei Bedarf abbrechen kann.
+    this._settleTimer = setTimeout(() => {
+      this._settleTimer = null;
       this.isTransitioning = false;
     }, TOTAL_TRANSITION + 200);
   }

@@ -1,4 +1,4 @@
-import { MESSAGES, MESSAGE_INTERVAL, TOTAL_TRANSITION } from './constants.js';
+import { MESSAGES, MESSAGE_INTERVAL, TOTAL_TRANSITION, PREFERS_REDUCED_MOTION } from './constants.js';
 
 export class MessageRotator {
   constructor(board) {
@@ -10,15 +10,14 @@ export class MessageRotator {
   }
 
   start() {
-    // Show first message immediately
+    // Erste Nachricht sofort anzeigen
     this.next();
 
-    // Begin auto-rotation
-    this._timer = setInterval(() => {
-      if (!this._paused && !this.board.isTransitioning) {
-        this.next();
-      }
-    }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+    // Automatische Rotation nur starten, wenn keine reduzierte Bewegung gewünscht wird.
+    // Manuelle Navigation (Tastatur) bleibt in jedem Fall erlaubt.
+    if (!PREFERS_REDUCED_MOTION) {
+      this._startTimer();
+    }
   }
 
   stop() {
@@ -40,15 +39,21 @@ export class MessageRotator {
     this._resetAutoRotation();
   }
 
+  // Privater Helper: startet den Auto-Rotations-Timer neu.
+  // Zentralisiert den identischen setInterval-Block aus start() und _resetAutoRotation().
+  _startTimer() {
+    this._timer = setInterval(() => {
+      if (!this._paused && !this.board.isTransitioning) {
+        this.next();
+      }
+    }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+  }
+
   _resetAutoRotation() {
-    // Reset timer when user manually navigates
+    // Timer nur zurücksetzen, wenn Auto-Rotation aktiv ist (kein PREFERS_REDUCED_MOTION)
     if (this._timer) {
       clearInterval(this._timer);
-      this._timer = setInterval(() => {
-        if (!this._paused && !this.board.isTransitioning) {
-          this.next();
-        }
-      }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+      this._startTimer();
     }
   }
 }

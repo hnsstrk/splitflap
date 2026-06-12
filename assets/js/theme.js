@@ -36,12 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
     }
 
-    // Init: saved > system preference > light
+    // Init: gespeicherte Wahl > window.splitflapDefaultTheme (Site-Param) > Systempräferenz > 'light'
     const saved = getStoredTheme();
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 
+    // window.splitflapDefaultTheme wird von head.html injiziert, falls params.defaultTheme gesetzt ist.
+    // Nur gültige Werte ('light'|'mirage'|'dark') werden übernommen — alles andere wird ignoriert.
+    const siteDefault =
+      typeof window.splitflapDefaultTheme === 'string' &&
+      THEMES.includes(window.splitflapDefaultTheme)
+        ? window.splitflapDefaultTheme
+        : null;
+
     if (saved && THEMES.includes(saved)) {
         setTheme(saved, false);
+    } else if (siteDefault) {
+        setTheme(siteDefault, false);
     } else {
         setTheme(systemDark.matches ? 'mirage' : 'light', false);
     }

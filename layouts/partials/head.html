@@ -24,15 +24,20 @@
 {{ with $description }}
 <meta property="og:description" content="{{ . }}">
 {{ end }}
+{{/* Shared-Image-Block: og:image und twitter:image nutzen dasselbe .Resize-Ergebnis,
+     damit Hugo das Bild nur einmal verarbeitet. Beide Meta-Tags stehen im selben
+     {{ with }}-Block. */}}
 {{ if .Params.featured_image }}
   {{ $img := .Resources.GetMatch .Params.featured_image }}
   {{ with $img }}
-    {{ $og := .Resize "1200x webp q85" }}
-    <meta property="og:image" content="{{ $og.Permalink }}">
+    {{ $resized := .Resize "1200x webp q85" }}
+    <meta property="og:image" content="{{ $resized.Permalink }}">
+    <meta name="twitter:image" content="{{ $resized.Permalink }}">
   {{ end }}
 {{ else }}
   {{ with site.Params.ogImage }}
   <meta property="og:image" content="{{ . | absURL }}">
+  <meta name="twitter:image" content="{{ . | absURL }}">
   {{ end }}
 {{ end }}
 <meta property="og:site_name" content="{{ site.Title }}">
@@ -44,17 +49,6 @@
 {{ with $description }}
 <meta name="twitter:description" content="{{ . }}">
 {{ end }}
-{{ if .Params.featured_image }}
-  {{ $img := .Resources.GetMatch .Params.featured_image }}
-  {{ with $img }}
-    {{ $og := .Resize "1200x webp q85" }}
-    <meta name="twitter:image" content="{{ $og.Permalink }}">
-  {{ end }}
-{{ else }}
-  {{ with site.Params.ogImage }}
-  <meta name="twitter:image" content="{{ . | absURL }}">
-  {{ end }}
-{{ end }}
 
 {{/* Favicon */}}
 <link rel="icon" href="{{ "images/favicon.ico" | relURL }}" type="image/x-icon">
@@ -65,7 +59,7 @@
 {{ if .IsHome }}
 {{ $sameAs := slice }}
 {{ with site.Params.social.github }}{{ $sameAs = $sameAs | append (printf "https://github.com/%s" .) }}{{ end }}
-{{ with site.Params.social.mastodon }}{{ $sameAs = $sameAs | append (printf "https://mastodon.social/%s" .) }}{{ end }}
+{{ with site.Params.social.mastodon }}{{ $sameAs = $sameAs | append (cond (hasPrefix . "http") . (printf "https://mastodon.social/%s" .)) }}{{ end }}
 {{ with site.Params.social.bluesky }}{{ $sameAs = $sameAs | append (printf "https://bsky.app/profile/%s" .) }}{{ end }}
 {{ with site.Params.social.linkedin }}{{ $sameAs = $sameAs | append (printf "https://linkedin.com/in/%s" .) }}{{ end }}
 <script type="application/ld+json">
@@ -109,6 +103,12 @@
   {{ end }}
   <link rel="stylesheet" href="{{ $boardCss.RelPermalink }}"{{ if hugo.IsProduction }} integrity="{{ $boardCss.Data.Integrity }}" crossorigin="anonymous"{{ end }}>
 {{ end }}
+
+{{/* defaultTheme-Param injizieren, bevor theme.js geladen wird.
+     theme.js liest window.splitflapDefaultTheme und verwendet es als Fallback
+     zwischen localStorage-Wahl und Systempräferenz. Muster analog zu
+     window.splitflapMessages in layouts/index.html. */}}
+{{ with site.Params.defaultTheme }}<script>window.splitflapDefaultTheme = {{ . | jsonify | safeJS }};</script>{{ end }}
 
 {{/* Theme JS — im Head für FOUC-Vermeidung */}}
 {{ with resources.Get "js/theme.js" }}

@@ -9,6 +9,14 @@ export const MESSAGE_INTERVAL = 4000;
 
 export const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?\'/: ';
 
+// Prüft beim Laden einmalig, ob der Nutzer reduzierte Bewegung bevorzugt.
+// Wird von Board.js und MessageRotator.js genutzt — zentrale Abfrage, kein Duplizieren.
+// Auf nachträgliche Änderungen des Media-Query-Status wird bewusst nicht reagiert
+// (Initialwert beim Seitenaufruf genügt für die Mehrheit der Anwendungsfälle).
+export const PREFERS_REDUCED_MOTION =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // Lese Farben aus CSS Custom Properties (theme-aware)
 function getCSSColor(varName) {
   return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();

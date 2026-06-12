@@ -1,4 +1,4 @@
-import { CHARSET, getScrambleColors, SCRAMBLE_DURATION, FLIP_DURATION } from './constants.js';
+import { CHARSET, getScrambleColors, SCRAMBLE_DURATION, FLIP_DURATION, PREFERS_REDUCED_MOTION } from './constants.js';
 
 export class Tile {
   constructor(row, col) {
@@ -50,6 +50,14 @@ export class Tile {
       clearTimeout(this._pendingTimeout);
       this._pendingTimeout = null;
     }
+
+    // Wenn der Nutzer reduzierte Bewegung bevorzugt, Zielzeichen sofort setzen —
+    // kein Scramble, keine Flip-Animation. isAnimating bleibt false.
+    if (PREFERS_REDUCED_MOTION) {
+      this.setChar(targetChar);
+      return;
+    }
+
     this.isAnimating = true;
 
     this._pendingTimeout = setTimeout(() => {
