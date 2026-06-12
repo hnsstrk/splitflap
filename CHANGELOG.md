@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.1] - 2026-06-12
+
+### Changed
+
+- **Title typography unified the other way around** — 0.3.0 made all titles
+  bold and wide (600/125%); the intended look was the slim, narrow style of
+  the about page. The graduated slim heading scale (h1 250/100% … h6 400/102%)
+  is restored for markdown content, and the editorial titles now follow it:
+  project titles at the h2 step (280/100%), blog list titles, link handles
+  and the related-posts heading at the h3 step (320/102%). Mega-titles,
+  category heads and the solid numerals stay bold as the display tier.
+
 ## [0.3.0] - 2026-06-12
 
 ### Changed

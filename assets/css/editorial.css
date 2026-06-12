@@ -179,10 +179,11 @@
   hyphens: auto;
 }
 .editorial-row .er-title {
-  font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 600;
+  /* Schlanke Heading-Skala („Über mich"-Rezept) — entspricht h2 (280/100%) */
+  font-family: var(--font-heading); font-stretch: 100%;
+  font-weight: 280;
   font-size: clamp(28px, 3vw, 40px);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   line-height: 1;
   color: var(--text-primary);
   margin: 0 0 var(--space-2xs);
@@ -301,10 +302,11 @@
   display: block;
 }
 .logbook-row .lb-title {
-  font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 600;
+  /* Schlanke Heading-Skala — kleinere Größe, daher h3-Stufe (320/102%) */
+  font-family: var(--font-heading); font-stretch: 102%;
+  font-weight: 320;
   font-size: clamp(22px, 2.3vw, 30px);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--text-primary);
   margin: 0 0 var(--space-xs);
@@ -468,10 +470,11 @@
 }
 .as-row:last-child { border-bottom: none; }
 .as-row .as-handle {
-  font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 600;
+  /* Schlanke Heading-Skala — kleinere Größe, daher h3-Stufe (320/102%) */
+  font-family: var(--font-heading); font-stretch: 102%;
+  font-weight: 320;
   font-size: clamp(22px, 2.2vw, 30px);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   display: inline-block;
   line-height: 1;
@@ -603,10 +606,11 @@
   border-top: 1px solid var(--border-color);
 }
 .editorial-related .related-heading {
-  font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 700;
+  /* Schlanke Heading-Skala — h3-Stufe (320/102%) */
+  font-family: var(--font-heading); font-stretch: 102%;
+  font-weight: 320;
   font-size: clamp(24px, 2.4vw, 32px);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   display: flex; align-items: baseline; gap: var(--space-s);
   margin: 0 0 var(--space-m);
@@ -636,10 +640,11 @@
   padding-top: var(--space-s);
 }
 .tag-index-item {
-  font-family: var(--font-heading); font-stretch: 125%;
+  /* Schlanke Heading-Skala — h3-Stufe (320/102%) wie die anderen Listen-Titel */
+  font-family: var(--font-heading); font-stretch: 102%;
   font-size: clamp(20px, 2vw, 28px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-weight: 320;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   text-transform: lowercase;
   border-bottom: none;
