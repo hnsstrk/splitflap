@@ -79,8 +79,17 @@ Die Entkopplung site-spezifischer Werte ist abgeschlossen (2026-06-10). Eingefü
 
 ## Offene Aufgaben bis zur Veröffentlichung
 
-1. **hnsstrk.de umstellen:** `themes/hnsstrk` entfernen, Submodule einbinden, `theme = "splitflap"` setzen, Server-Build-Skript `build-hnsstrk` um `git submodule update --init` ergänzen — **vorher auf dem Server testen, sonst deployt die Seite ohne Theme**. Die nötigen Params sind in der hugo.toml von hnsstrk.de bereits vorbereitet (board.messages, contentLicense, avatar, ogLocale).
-2. GitHub-Repo `hnsstrk/splitflap` anlegen (gemeinsam mit dem User)
+Verbesserungsrunde 2026-06-12 abgeschlossen: reduced-motion-Support, Ayu-Token-Integration, A11y-Kontraste, Pagination, featured_image, defaultTheme, Mastodon-Voll-URL, go.mod, CHANGELOG.md, README-Update, exampleSite-Mindmap/Gantt-Demo.
+
+**Nächster Schritt: Galerie-Einreichung nach Tag v0.1.0**
+
+1. **Tag v0.1.0 setzen** (gemeinsam mit dem User): `git tag -s v0.1.0 -m "Initial release"` + `git push origin v0.1.0`
+2. **Hugo Themes Gallery PR** einreichen: Fork von [gohugoio/hugoThemesSiteBuilder](https://github.com/gohugoio/hugoThemesSiteBuilder), `themes.toml` eintrag, PR stellen — Details siehe [Submission Guide](https://github.com/gohugoio/hugoThemesSiteBuilder#adding-a-theme).
+
+### Erledigte Aufgaben (Referenz)
+
+- ~~hnsstrk.de umstellen~~ — abgeschlossen, Submodule aktiv, Server-Build-Skript aktualisiert
+- ~~GitHub-Repo anlegen~~ — `hnsstrk/splitflap` ist öffentlich auf GitHub
 
 ## Projektdokumentation
 

@@ -4,8 +4,7 @@ date: 2024-03-15
 draft: false
 description: "A walkthrough of the theme's main features: split-flap board, color themes, shortcodes, and content sections."
 tags: ["Hugo", "Theme", "Setup"]
-# featured_image: "cover.png"
-# featured_layout: "left"   # left | right | top | bottom
+featured_image: "cover.png"
 # toc: true
 ---
 
@@ -98,8 +97,7 @@ A short summary at the top of long posts.
 | `draft` | bool | yes | |
 | `description` | string | yes | Used in meta and list cards |
 | `tags` | list | yes | |
-| `featured_image` | string | no | Filename inside the page bundle |
-| `featured_layout` | string | no | `left` / `right` / `top` / `bottom` |
+| `featured_image` | string | no | Filename inside the page bundle, shown above the post and used for OG meta |
 | `toc` | bool | no | Force table of contents |
 
 ## Next steps

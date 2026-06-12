@@ -1,5 +1,10 @@
 baseURL = "https://example.org/"
 
+# themesDir — points two levels up so `cd exampleSite && hugo server` works
+# without extra flags. Remove or comment out when the exampleSite is used
+# outside the theme repository.
+themesDir = "../.."
+
 # Site language locale — used for html[lang] (Hugo 0.158+ key, replaces languageCode).
 # Common values: "de" (German), "en" (English), "fr" (French).
 locale = "en"
@@ -38,16 +43,6 @@ enableRobotsTXT = true
   # Default color theme on first visit.
   # Options: "light" | "mirage" | "dark"
   defaultTheme = "light"
-
-  # Featured image layout for blog list cards.
-  # Controls how the thumbnail is placed relative to the post title/excerpt.
-  # Options:
-  #   "left"   — thumbnail on the left, text on the right (recommended aspect: square, e.g. 600×600)
-  #   "right"  — thumbnail on the right, text on the left (recommended aspect: square, e.g. 600×600)
-  #   "top"    — full-width image above the text (recommended aspect: wide, e.g. 1200×400)
-  #   "bottom" — full-width image below the text (recommended aspect: wide, e.g. 1200×400)
-  # Can be overridden per post via frontmatter: featured_layout = "top"
-  featuredLayout = "left"
 
   # Footer tagline — short description displayed below the site logo in the footer.
   tagline = "A split-flap display theme for Hugo — configure everything in hugo.toml."
@@ -103,6 +98,12 @@ enableRobotsTXT = true
       ['', '', 'CONFIGURE ME', 'IN HUGO.TOML', '', '', ''],
       ['', '', 'OPEN SOURCE', 'MIT LICENSE', '', 'ENJOY', '']
     ]
+
+# ---------------------------------------------------------------------------
+# Pagination — controls how many posts appear per blog list page.
+# ---------------------------------------------------------------------------
+# [pagination]
+#   pagerSize = 20
 
 # ---------------------------------------------------------------------------
 # Markup settings

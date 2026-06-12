@@ -5,7 +5,7 @@ description = "A split-flap display theme with Ayu colors and Monaspace typograp
 homepage = "https://github.com/hnsstrk/splitflap"
 demosite = "https://hnsstrk.de/"
 tags = ["responsive", "dark-mode", "monospace", "split-flap", "ayu", "minimal", "personal"]
-features = ["3 color themes (light/mirage/dark)", "split-flap display", "Monaspace fonts", "Nerd Font icons"]
+features = ["split-flap landing page", "3 Ayu color themes (light/mirage/dark)", "Mermaid diagrams with live re-theming", "i18n (de/en)", "Monaspace typography + Nerd Font icons", "blog/projects/links/about layouts", "reduced-motion support", "CSP-friendly asset pipeline"]
 min_version = "0.158.0"
 
 [author]

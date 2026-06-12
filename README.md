@@ -6,6 +6,8 @@ editorial content style, Ayu colors and Monaspace typography.
 
 **Demo:** [hnsstrk.de](https://hnsstrk.de/)
 
+![Splitflap theme screenshot](images/screenshot.png)
+
 ## Features
 
 - **Split-flap landing page** — animated board with scramble effect, message
@@ -26,11 +28,11 @@ editorial content style, Ayu colors and Monaspace typography.
 
 ## Requirements
 
-- Hugo **extended** ≥ 0.146.0 (image processing, CSS bundling)
+- Hugo **extended** ≥ 0.158.0 (requires `site.Language.Locale`)
 
 ## Installation
 
-As a Git submodule (recommended):
+### Option A — Git submodule (recommended)
 
 ```bash
 git submodule add https://github.com/hnsstrk/splitflap.git themes/splitflap
@@ -39,6 +41,23 @@ echo 'theme = "splitflap"' >> hugo.toml
 
 > **Note for CI/server builds:** make sure your build checks out submodules
 > (`git submodule update --init`).
+
+### Option B — Hugo Modules
+
+```bash
+hugo mod init github.com/yourname/yoursite
+```
+
+Then add to `hugo.toml`:
+
+```toml
+[module]
+  [[module.imports]]
+    path = "github.com/hnsstrk/splitflap"
+```
+
+> The theme has no module dependencies of its own, so it ships without a
+> `go.sum` — no `hugo mod tidy` is required on the consumer side.
 
 ## Configuration
 
@@ -67,6 +86,14 @@ theme = "splitflap"
     # bluesky = "yourhandle"
     # linkedin = "yourhandle"
 
+  # Default color theme on first visit — "light" | "mirage" | "dark" (default: "light").
+  defaultTheme = "light"
+
+  # Mastodon social link — accepts either a bare handle "@user" (resolved to
+  # mastodon.social/@user) or a full URL "https://fosstodon.org/@user".
+  [params.social]
+    mastodon = "@yourhandle"
+
   # Split-flap board messages on the landing page. Each message is an array
   # of up to 7 lines, max. 20 characters each (A-Z, 0-9, .,-!?'/: and space).
   # Omit to get the theme's default demo messages.
@@ -75,6 +102,10 @@ theme = "splitflap"
       ['', '', 'HELLO WORLD', '', 'SPLITFLAP', '', ''],
       ['', '', 'CONFIGURE ME', 'IN HUGO.TOML', '', '', '']
     ]
+
+# Pagination — controls how many posts appear per blog list page.
+# [pagination]
+#   pagerSize = 20
 
 [menus]
   [[menus.main]]

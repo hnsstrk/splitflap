@@ -72,6 +72,57 @@ pie showData
     "Operations" : 15
 ```
 
+## Mindmap
+
+A mindmap of the theme's main feature areas:
+
+```mermaid
+mindmap
+  root((Splitflap))
+    Landing
+      Split-flap board
+      Message rotation
+      Keyboard controls
+    Appearance
+      Ayu Light
+      Ayu Mirage
+      Ayu Dark
+    Typography
+      Monaspace
+      Nerd Font icons
+    Content
+      Blog
+      Projects
+      Links
+      About
+    Diagrams
+      Flowchart
+      Sequence
+      Pie chart
+      Mindmap
+      Gantt
+```
+
+## Gantt chart
+
+A sample release timeline:
+
+```mermaid
+gantt
+    title Splitflap release timeline
+    dateFormat YYYY-MM-DD
+    section Foundation
+        Extract theme from site  :done, extract, 2026-06-01, 5d
+        exampleSite              :done, example, after extract, 3d
+    section Polish
+        i18n de/en               :done, i18n, 2026-06-06, 2d
+        A11y and contrast fixes  :done, a11y, after i18n, 2d
+        Pagination               :done, pag, after a11y, 1d
+    section Release
+        Tag v0.1.0               :active, tag, 2026-06-12, 1d
+        Hugo themes gallery PR   :gallery, after tag, 3d
+```
+
 ## Color mapping
 
 The eight Ayu syntax colors are mapped to Mermaid's `cScale` variables in rainbow order:
