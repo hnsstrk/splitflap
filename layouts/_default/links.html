@@ -46,15 +46,14 @@
 
   {{ range $gi, $cat := $cats }}
     <section class="address-block">
-      {{/* Kategorie-Trenner in der Display-Familie der Jahres-Trenner (Blog):
-           Outline-Ziffer + Name + Subtitle, volle Breite statt schmaler Spalte */}}
-      <div class="category-divider">
-        <span class="cd-num">{{ printf "%02d" (add $gi 1) }}</span>
-        <div class="cd-text">
-          <h2 class="cd-name">{{ $cat.name | lower }}</h2>
-          {{ with $cat.subtitle }}<p class="cd-sub">{{ . }}</p>{{ end }}
-        </div>
-      </div>
+      <h2 class="as-title">
+        {{/* Ziffer + Label im Blog-Datums-Muster (.lb-day / .lb-month):
+             massive Ziffer, darunter das Small-Caps-Label „Kategorie" */}}
+        <span class="as-num">{{ printf "%02d" (add $gi 1) }}</span>
+        <span class="as-cat-label">{{ i18n "category" }}</span>
+        {{ $cat.name | lower }}
+        {{ with $cat.subtitle }}<span class="as-sub">{{ . }}</span>{{ end }}
+      </h2>
 
       <div class="as-list">
         {{ range $cat.links }}

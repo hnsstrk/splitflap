@@ -4,7 +4,7 @@
      Mapping aus Front-Matter:
        title         → er-title
        description   → er-desc
-       category      → er-meta erste Spalte
+       category      → er-idx-label (Small-Caps unter der Nummer, erste Spalte)
        technologies  → er-stack im er-rail
        date          → sort key (.ByDate.Reverse)
        github        → er-repo URL (erkennt github/gitlab/gitea/bitbucket)
@@ -63,16 +63,20 @@
       {{ end }}
 
       <article class="editorial-row">
-        <span class="er-idx">{{ printf "%02d" (add $i 1) }}</span>
+        {{/* Ziffer + Kategorie-Label im Blog-Datums-Muster (.lb-day / .lb-month):
+             massive Ziffer, darunter das Small-Caps-Label der Kategorie.
+             er-idx-wrap ist tragend: erstes Grid-Kind (Spalte 1 der editorial-row),
+             stapelt Nummer + Label — bewusst ohne eigene CSS-Regel */}}
+        <div class="er-idx-wrap">
+          <span class="er-idx">{{ printf "%02d" (add $i 1) }}</span>
+          {{ with $p.Params.category }}<span class="er-idx-label">{{ . }}</span>{{ end }}
+        </div>
 
         <div>
           <a class="er-title" href="{{ $p.RelPermalink }}">
             {{ $p.Title }}<span class="ext">↗</span>
           </a>
           {{ with $p.Description }}<p class="er-desc">{{ . }}</p>{{ end }}
-          {{ with $p.Params.category }}
-            <div class="er-meta"><span>{{ . }}</span></div>
-          {{ end }}
         </div>
 
         <div class="er-rail">

@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.0] - 2026-06-12
+
+### Changed
+
+- **One numeral system, modeled on the blog date** — the blog logbook's
+  date block (massive solid number, small-caps label below) is now the
+  shared pattern: project rows show `01 / CATEGORY`, links categories show
+  `01 / CATEGORY` above the category name. The outline-numeral experiment
+  from 0.2.0 is reverted for row numerals (year dividers keep their
+  outline style).
+- **Links page back to the two-column address book** — the full-width
+  category dividers from 0.2.0 are reverted; the narrow category column
+  returns, now headed by the unified numeral block.
+- **Unified title typography** — one recipe (weight 600, stretch 125%,
+  tracking -0.035em) for markdown content headings (h2–h6) and editorial
+  titles. Content headings were thin (weight 280–440) and narrow before;
+  project titles drop from 700 to 600. Page-level h1 and the mega-titles
+  remain intentionally distinct display styles.
+
+### Fixed
+
+- Long category labels (e.g. PRODUKTIVITÄT) breaking mid-word in the
+  project index column.
+
 ## [0.2.0] - 2026-06-12
 
 ### Changed

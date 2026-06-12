@@ -66,6 +66,9 @@ other = "Tags"
 [categories]
 other = "Categories"
 
+[category]
+other = "Category"
+
 [backToTop]
 other = "Back to top"
 

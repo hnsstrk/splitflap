@@ -140,7 +140,7 @@
   display: grid;
   /* Feste Spalten via minmax flexibilisiert, damit sie zwischen 768–900px
      nicht zu eng werden, bevor der Single-Column-Umbruch greift */
-  grid-template-columns: minmax(64px, 88px) minmax(0, 1fr) minmax(160px, 220px);
+  grid-template-columns: minmax(96px, 140px) minmax(0, 1fr) minmax(160px, 220px);
   gap: var(--space-m);
   padding: var(--space-m) 4px;
   border-bottom: 1px solid var(--border-color);
@@ -151,26 +151,38 @@
 .editorial-row:hover {
   background: color-mix(in srgb, var(--type-accent, var(--accent-violet)) 4%, transparent);
 }
+/* Ziffer + Kategorie-Label im Blog-Datums-Muster (.lb-date) */
 .editorial-row .er-idx {
   font-family: var(--font-heading); font-stretch: 125%;
+  /* massive, solide Ziffer — exakt das .lb-day-Rezept */
   font-weight: 700;
-  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
-  line-height: 0.9;
-  /* Outline-Ziffern — gleiche Display-Familie wie die Jahres-Trenner im Blog
-     und die Kategorie-Trenner auf der Links-Seite */
-  color: transparent;
-  /* 70 % statt 55 % wie bei yd-num/cd-num: kleinere Ziffern brauchen
-     einen kräftigeren Strich, um sichtbar zu bleiben */
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text-muted) 70%, transparent);
+  font-size: clamp(2.5rem, 1.4rem + 4.8vw, 4rem);
+  letter-spacing: -0.07em;
+  line-height: 0.85;
+  color: var(--text-primary);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.08em;
+  display: block;
   user-select: none;
+}
+/* Small-Caps-Label der Kategorie unter der Ziffer (.lb-month-Rezept) */
+.editorial-row .er-idx-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  /* Etwas enger als lb-month (0.18em): Kategorie-Labels wie PRODUKTIVITÄT
+     sind länger als Monatskürzel und sollen nicht mitten im Wort brechen */
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: var(--space-2xs);
+  hyphens: auto;
 }
 .editorial-row .er-title {
   font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(28px, 3vw, 40px);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   line-height: 1;
   color: var(--text-primary);
   margin: 0 0 var(--space-2xs);
@@ -199,32 +211,6 @@
   color: var(--text-secondary);
   max-width: 54ch;
   margin: 0 0 var(--space-xs);
-}
-.editorial-row .er-meta {
-  font-family: var(--font-ui);
-  font-size: var(--step--2);
-  color: var(--text-secondary);
-  letter-spacing: 0.06em;
-  display: flex; flex-wrap: wrap; gap: var(--space-3xs) var(--space-xs);
-  align-items: center;
-  text-transform: uppercase;
-}
-.editorial-row .er-meta .er-stack {
-  display: inline-flex; gap: var(--space-3xs);
-  text-transform: none;
-  letter-spacing: 0;
-}
-.editorial-row .er-meta .er-stack-item {
-  color: var(--sl-color, var(--text-secondary));
-  font-weight: 600;
-  font-size: var(--step--2);
-  letter-spacing: 0.02em;
-}
-.editorial-row .er-meta .er-stack-item + .er-stack-item::before {
-  content: '·';
-  color: var(--text-muted);
-  margin-right: var(--space-3xs);
-  font-weight: 400;
 }
 .editorial-row .er-rail {
   font-family: var(--font-ui);
@@ -261,7 +247,7 @@
   text-transform: lowercase;
   letter-spacing: 0;
 }
-.editorial-row .er-rail .er-repo:hover { color: var(--accent-violet); }
+.editorial-row .er-rail .er-repo:hover { color: var(--type-accent, var(--accent-violet)); }
 .editorial-row .er-rail .er-private {
   color: var(--text-muted);
   font-family: var(--font-ui);
@@ -408,49 +394,61 @@
    C · Adressbuch (Links)
    ========================================================================== */
 .address-block {
-  padding: 0 0 var(--space-l);
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  gap: var(--space-xl);
+  padding: var(--space-l) 0;
   border-bottom: 1px solid var(--border-color);
   position: relative;
 }
-.address-block:last-of-type { border-bottom: none; }
-
-/* Kategorie-Trenner — Display-Familie der Jahres-Trenner (Blog):
-   Outline-Ziffer + Name + Subtitle über volle Breite statt schmaler
-   Spalte mit Mehrfach-Umbruch */
-.category-divider {
-  display: flex; align-items: flex-end; gap: var(--space-m);
-  padding: var(--space-xl) 0 var(--space-s);
+.address-block:first-of-type {
+  border-top: 1px solid var(--border-color);
 }
-.address-block:first-of-type .category-divider { padding-top: 0; }
-.category-divider .cd-num {
+.as-title {
   font-family: var(--font-heading); font-stretch: 125%;
+  /* Bewusste Ausnahme vom Titel-Rezept (600/-0.035em): Kategorie-Kopf ist
+     ein Display-Element der Megatitle-Familie, kein Content-Heading */
   font-weight: 700;
-  font-size: clamp(56px, 7vw, 104px);
-  line-height: 0.82;
-  letter-spacing: -0.08em;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text-muted) 55%, transparent);
-  font-variant-numeric: tabular-nums;
-  user-select: none;
-}
-.category-divider .cd-name {
-  font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 700;
-  font-size: clamp(26px, 2.8vw, 40px);
-  letter-spacing: -0.05em;
-  line-height: 0.95;
+  font-size: clamp(32px, 3.6vw, 52px);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
   color: var(--text-primary);
-  margin: 0;
+  align-self: start;
 }
-.category-divider .cd-sub {
+/* Ziffer im Blog-Datums-Muster (.lb-day): massive, solide Ziffer */
+.as-title .as-num {
+  display: block;
+  font-family: var(--font-heading); font-stretch: 125%;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 1.4rem + 4.8vw, 4rem);
+  letter-spacing: -0.07em;
+  line-height: 0.85;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+/* Small-Caps-Label „Kategorie" unter der Ziffer (.lb-month-Rezept) */
+.as-title .as-cat-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: var(--space-2xs);
+  margin-bottom: var(--space-s);
+}
+.as-title .as-sub {
+  display: block;
   font-family: var(--font-body);
   font-style: oblique 8deg;
   font-weight: 400;
-  font-size: var(--step--1);
+  font-size: 14px;
   color: var(--text-secondary);
-  margin: var(--space-3xs) 0 0;
+  margin-top: var(--space-xs);
+  letter-spacing: 0;
   line-height: 1.55;
-  max-width: 48ch;
+  max-width: 24ch;
 }
 .as-list {
   display: flex; flex-direction: column;
@@ -728,8 +726,7 @@
     grid-template-columns: 1fr;
   }
   .editorial-row .er-idx {
-    font-size: 32px;
-    line-height: 1;
+    font-size: 36px;
   }
   .editorial-row .er-rail {
     text-align: left;
@@ -749,13 +746,9 @@
     text-align: left;
   }
 
-  .category-divider {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2xs);
-  }
-  .category-divider .cd-num {
-    font-size: 48px;
+  .address-block {
+    grid-template-columns: 1fr;
+    gap: var(--space-m);
   }
   /* Lange Handles (z. B. @user@instanz.tld) dürfen umbrechen statt überzulaufen */
   .as-row {
