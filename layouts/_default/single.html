@@ -16,7 +16,7 @@
 
 <div class="container type-page animate-fade-in" style="--type-accent: {{ $accent | safeCSS }};">
   <span class="type-eyebrow"><span class="te-dot"></span>
-    {{ if $isProject }}projekt{{ with .Params.category }} · {{ . | lower }}{{ end }}{{ else }}{{ .Section | lower }}{{ end }}
+    {{ if $isProject }}{{ i18n "eyebrowProject" }}{{ with .Params.category }} · {{ . | lower }}{{ end }}{{ else }}{{ .Section | lower }}{{ end }}
   </span>
 
   <h1 class="type-megatitle single-megatitle">{{ .Title }}</h1>
@@ -33,7 +33,7 @@
           </a>
         {{ else }}
           <span class="tr-link er-private">
-            <span class="nf-icon">&#xf023;</span>privat
+            <span class="nf-icon">&#xf023;</span>{{ i18n "private" }}
           </span>
         {{ end }}
       </span>

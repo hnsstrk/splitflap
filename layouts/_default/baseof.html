@@ -397,7 +397,7 @@
                     <span class="footer-col-title">{{ i18n "footerElsewhere" | default "Anderswo" }}</span>
                     <nav class="footer-nav">
                         {{ with site.Params.social.github }}<a href="https://github.com/{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>{{ end }}
-                        {{ with site.Params.social.mastodon }}<a href="https://mastodon.social/{{ . }}" target="_blank" rel="noopener noreferrer">Mastodon</a>{{ end }}
+                        {{ with site.Params.social.mastodon }}<a href="{{ if hasPrefix . "http" }}{{ . }}{{ else }}https://mastodon.social/{{ . }}{{ end }}" target="_blank" rel="noopener noreferrer">Mastodon</a>{{ end }}
                         {{ with site.Params.social.bluesky }}<a href="https://bsky.app/profile/{{ . }}" target="_blank" rel="noopener noreferrer">Bluesky</a>{{ end }}
                         {{ with site.Params.social.linkedin }}<a href="https://linkedin.com/in/{{ . }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>{{ end }}
                         <a href="{{ "index.xml" | absURL }}">RSS</a>

@@ -24,7 +24,7 @@
     "link"      "&#xf0c1;" }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-string);">
-  <span class="type-eyebrow"><span class="te-dot"></span>links · adressbuch</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowLinks" }}</span>
   <h1 class="type-megatitle">{{ .Title }}<span class="punct">.</span></h1>
 
   {{ with .Description }}
@@ -38,7 +38,7 @@
   {{ range $cats }}{{ $total = add $total (len .links) }}{{ end }}
 
   <div class="type-toolrow">
-    <span>{{ $total }} Einträge · {{ len $cats }} Kategorien</span>
+    <span>{{ i18n "entries" $total }} · {{ len $cats }} {{ i18n "categories" }}</span>
     <span class="tr-right">
       <a class="tr-link" href="{{ "/index.xml" | relURL }}">RSS ↗</a>
     </span>
@@ -47,7 +47,7 @@
   {{ range $gi, $cat := $cats }}
     <section class="address-block">
       <h2 class="as-title">
-        <span class="as-num">{{ printf "%02d" (add $gi 1) }} · Kategorie</span>
+        <span class="as-num">{{ printf "%02d" (add $gi 1) }} · {{ i18n "category" }}</span>
         {{ $cat.name | lower }}
         {{ with $cat.subtitle }}<span class="as-sub">{{ . }}</span>{{ end }}
       </h2>

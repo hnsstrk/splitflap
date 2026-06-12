@@ -11,15 +11,15 @@
 {{ $terms := .Data.Terms.Alphabetical }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-markup);">
-  <span class="type-eyebrow"><span class="te-dot"></span>blog · themen</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowTaxonomy" }}</span>
   <h1 class="type-megatitle">{{ .Title }}<span class="punct">.</span></h1>
 
   {{ with .Description }}<p class="type-lede">{{ . | safeHTML }}</p>{{ end }}
 
   <div class="type-toolrow">
-    <span>{{ len $terms }} Themen · alphabetisch</span>
+    <span>{{ i18n "topicsAlphabetical" (len $terms) }}</span>
     <span class="tr-right">
-      <a class="tr-link" href="{{ "/blog/" | relURL }}">Logbuch ↗</a>
+      <a class="tr-link" href="{{ "/blog/" | relURL }}">{{ i18n "logbook" }} ↗</a>
     </span>
   </div>
 

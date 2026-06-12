@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $monthsShort := slice "Jan" "Feb" "Mrz" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez" }}
+{{ $monthsShort := split (i18n "monthsShort") "|" }}
 {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
 {{ $allPosts = $allPosts.ByDate.Reverse }}
 {{ $years := slice }}
@@ -7,15 +7,15 @@
 {{ $yearsUniq := $years | uniq }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-markup);">
-  <span class="type-eyebrow"><span class="te-dot"></span>blog · archiv</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowBlogArchive" }}</span>
   <h1 class="type-megatitle">{{ .Title }}<span class="punct">.</span></h1>
 
   {{ with .Description }}<p class="type-lede">{{ . }}</p>{{ end }}
 
   <div class="type-toolrow">
-    <span>{{ len $allPosts }} Einträge · {{ len $yearsUniq }} Jahre</span>
+    <span>{{ i18n "entries" (len $allPosts) }} · {{ i18n "years" (len $yearsUniq) }}</span>
     <span class="tr-right">
-      <a class="tr-link"        href="{{ "/blog/" | relURL }}">Logbuch ↗</a>
+      <a class="tr-link"        href="{{ "/blog/" | relURL }}">{{ i18n "logbook" }} ↗</a>
       <a class="tr-link tr-rss" href="{{ "/blog/index.xml" | relURL }}">RSS ↗</a>
     </span>
   </div>
@@ -31,7 +31,7 @@
         <div class="year-divider">
           <span class="yd-num">{{ $y }}</span>
           <span class="yd-meta">
-            {{ $countInYear }} {{ cond (eq $countInYear 1) "Eintrag" "Einträge" }}
+            {{ i18n "entries" $countInYear }}
           </span>
         </div>
       {{ end }}

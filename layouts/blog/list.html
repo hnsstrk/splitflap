@@ -3,15 +3,17 @@
      blog/list.html — Logbuch
      Nutzt vorhandene Felder: Date, ReadingTime, Tags, Summary
      Gruppiert nach Jahr (riesige Outline-Ziffern als Trenner).
+     Paginiert über .Paginate — die Kopfzeile zählt weiterhin über ALLE Posts.
      ========================================================================== */}}
-{{ $monthsShort := slice "Jan" "Feb" "Mrz" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez" }}
+{{ $monthsShort := split (i18n "monthsShort") "|" }}
 {{ $allPosts := .Pages.ByDate.Reverse }}
 {{ $years    := slice }}
 {{ range $allPosts }}{{ $years = $years | append (.Date.Year) }}{{ end }}
 {{ $yearsUniq := $years | uniq }}
+{{ $paginator := .Paginate $allPosts }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-markup);">
-  <span class="type-eyebrow"><span class="te-dot"></span>blog · logbuch</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowBlogList" }}</span>
   <h1 class="type-megatitle">{{ .Title }}<span class="punct">.</span></h1>
 
   {{ with .Description }}
@@ -21,16 +23,16 @@
   {{ end }}
 
   <div class="type-toolrow">
-    <span>{{ len $allPosts }} {{ if eq (len $allPosts) 1 }}Eintrag{{ else }}Einträge{{ end }} · {{ len $yearsUniq }} {{ if eq (len $yearsUniq) 1 }}Jahr{{ else }}Jahre{{ end }}</span>
+    <span>{{ i18n "entries" (len $allPosts) }} · {{ i18n "years" (len $yearsUniq) }}</span>
     <span class="tr-right">
-      <a class="tr-link"        href="{{ "/tags/" | relURL }}">Tags</a>
+      <a class="tr-link"        href="{{ "/tags/" | relURL }}">{{ i18n "tags" }}</a>
       <a class="tr-link tr-rss" href="{{ "/blog/index.xml" | relURL }}">RSS ↗</a>
     </span>
   </div>
 
   <div class="logbook">
     {{ $currentYear := 0 }}
-    {{ range $allPosts }}
+    {{ range $paginator.Pages }}
       {{ $y := .Date.Year }}
       {{ if ne $y $currentYear }}
         {{ $currentYear = $y }}
@@ -39,7 +41,7 @@
         <div class="year-divider">
           <span class="yd-num">{{ $y }}</span>
           <span class="yd-meta">
-            {{ $countInYear }} {{ cond (eq $countInYear 1) "Eintrag" "Einträge" }}
+            {{ i18n "entries" $countInYear }}
           </span>
         </div>
       {{ end }}
@@ -64,10 +66,26 @@
         </div>
         <div class="lb-rail">
           <span class="lb-minutes">{{ .ReadingTime }}</span>
-          <span class="lb-minutes-unit">Min lesen</span>
+          <span class="lb-minutes-unit">{{ i18n "minutesRead" }}</span>
         </div>
       </article>
     {{ end }}
   </div>
+
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pager" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}
+        <a class="pager-link pager-prev" href="{{ $paginator.Prev.URL }}">{{ i18n "paginationNewer" }}</a>
+      {{ else }}
+        <span class="pager-link pager-prev is-disabled" aria-hidden="true">{{ i18n "paginationNewer" }}</span>
+      {{ end }}
+      <span class="pager-status">{{ i18n "paginationPageOf" (dict "Current" $paginator.PageNumber "Total" $paginator.TotalPages) }}</span>
+      {{ if $paginator.HasNext }}
+        <a class="pager-link pager-next" href="{{ $paginator.Next.URL }}">{{ i18n "paginationOlder" }}</a>
+      {{ else }}
+        <span class="pager-link pager-next is-disabled" aria-hidden="true">{{ i18n "paginationOlder" }}</span>
+      {{ end }}
+    </nav>
+  {{ end }}
 </div>
 {{ end }}

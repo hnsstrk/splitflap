@@ -9,25 +9,26 @@
   {{- end -}}
 {{- end -}}
 {{- $displayName := index $tagMap (.Title | lower) | default .Title -}}
-{{ $monthsShort := slice "Jan" "Feb" "Mrz" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez" }}
+{{ $monthsShort := split (i18n "monthsShort") "|" }}
 {{ $allPosts := .Pages.ByDate.Reverse }}
+{{ $paginator := .Paginate $allPosts }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-markup);">
-  <span class="type-eyebrow"><span class="te-dot"></span>blog · thema</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowTag" }}</span>
   <h1 class="type-megatitle"><span class="lb-tag-hash">#</span>{{ $displayName }}<span class="punct">.</span></h1>
 
   {{ with .Description }}<p class="type-lede">{{ . | safeHTML }}</p>{{ end }}
 
   <div class="type-toolrow">
-    <span>{{ len $allPosts }} {{ cond (eq (len $allPosts) 1) "Eintrag" "Einträge" }} mit diesem Thema</span>
+    <span>{{ i18n "entriesWithTopic" (len $allPosts) }}</span>
     <span class="tr-right">
-      <a class="tr-link" href="{{ "/tags/" | relURL }}">Alle Tags ↗</a>
-      <a class="tr-link" href="{{ "/blog/" | relURL }}">Logbuch ↗</a>
+      <a class="tr-link" href="{{ "/tags/" | relURL }}">{{ i18n "allTags" }} ↗</a>
+      <a class="tr-link" href="{{ "/blog/" | relURL }}">{{ i18n "logbook" }} ↗</a>
     </span>
   </div>
 
   <div class="logbook">
-    {{ range $allPosts }}
+    {{ range $paginator.Pages }}
       <article class="logbook-row logbook-row--compact">
         <div class="lb-date">
           <span class="lb-day">{{ .Date.Day }}</span>
@@ -40,5 +41,21 @@
       </article>
     {{ end }}
   </div>
+
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pager" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}
+        <a class="pager-link pager-prev" href="{{ $paginator.Prev.URL }}">{{ i18n "paginationNewer" }}</a>
+      {{ else }}
+        <span class="pager-link pager-prev is-disabled" aria-hidden="true">{{ i18n "paginationNewer" }}</span>
+      {{ end }}
+      <span class="pager-status">{{ i18n "paginationPageOf" (dict "Current" $paginator.PageNumber "Total" $paginator.TotalPages) }}</span>
+      {{ if $paginator.HasNext }}
+        <a class="pager-link pager-next" href="{{ $paginator.Next.URL }}">{{ i18n "paginationOlder" }}</a>
+      {{ else }}
+        <span class="pager-link pager-next is-disabled" aria-hidden="true">{{ i18n "paginationOlder" }}</span>
+      {{ end }}
+    </nav>
+  {{ end }}
 </div>
 {{ end }}

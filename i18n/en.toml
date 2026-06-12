@@ -28,9 +28,6 @@ other = "Pages"
 [footerElsewhere]
 other = "Elsewhere"
 
-[footerCopyright]
-other = "Licensed under CC BY 4.0"
-
 # Navigation
 [menuHome]
 other = "Home"
@@ -74,3 +71,90 @@ other = "Back to top"
 
 [externalLink]
 other = "External link"
+
+# Eyebrows (section · subtitle)
+[eyebrowBlogList]
+other = "blog · logbook"
+
+[eyebrowBlogArchive]
+other = "blog · archive"
+
+[eyebrowBlogSingle]
+other = "blog · article"
+
+[eyebrowTaxonomy]
+other = "blog · topics"
+
+[eyebrowTag]
+other = "blog · topic"
+
+[eyebrowAbout]
+other = "about · portrait"
+
+[eyebrowLinks]
+other = "links · address book"
+
+[eyebrowProjects]
+other = "projects · index"
+
+[eyebrowProject]
+other = "project"
+
+# Lists — counts (plural)
+[entries]
+one = "{{ .Count }} entry"
+other = "{{ .Count }} entries"
+
+[years]
+one = "{{ .Count }} year"
+other = "{{ .Count }} years"
+
+[entriesWithTopic]
+one = "{{ .Count }} entry on this topic"
+other = "{{ .Count }} entries on this topic"
+
+[topicsAlphabetical]
+one = "{{ .Count }} topic · alphabetical"
+other = "{{ .Count }} topics · alphabetical"
+
+[repositories]
+other = "Repositories"
+
+# Lists — labels
+[minutesRead]
+other = "min read"
+
+[allTags]
+other = "All tags"
+
+[logbook]
+other = "Logbook"
+
+[relatedHeading]
+other = "Also worth reading"
+
+[relatedLabel]
+other = "related"
+
+[category]
+other = "Category"
+
+[private]
+other = "private"
+
+[tldrSummary]
+other = "TL;DR — Summary"
+
+# Short month names (Jan–Dec), pipe-separated, split in the template
+[monthsShort]
+other = "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec"
+
+# Pagination
+[paginationNewer]
+other = "Newer"
+
+[paginationOlder]
+other = "Older"
+
+[paginationPageOf]
+other = "Page {{ .Current }} of {{ .Total }}"

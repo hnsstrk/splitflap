@@ -36,7 +36,7 @@
     "Midjourney"         "var(--syntax-constant)" }}
 
 <div class="container type-page animate-fade-in" style="--type-accent: var(--syntax-constant);">
-  <span class="type-eyebrow"><span class="te-dot"></span>projects · index</span>
+  <span class="type-eyebrow"><span class="te-dot"></span>{{ i18n "eyebrowProjects" }}</span>
   <h1 class="type-megatitle">{{ .Title }}<span class="punct">.</span></h1>
 
   {{ with .Description }}
@@ -46,7 +46,7 @@
   {{ end }}
 
   <div class="type-toolrow">
-    <span>{{ printf "%02d" (len .Pages) }} Repositories</span>
+    <span>{{ printf "%02d" (len .Pages) }} {{ i18n "repositories" }}</span>
   </div>
 
   <div class="editorial-list">
@@ -91,7 +91,7 @@
             </a>
           {{ else }}
             <span class="er-repo er-private">
-              <span class="nf-icon">&#xf023;</span>privat
+              <span class="nf-icon">&#xf023;</span>{{ i18n "private" }}
             </span>
           {{ end }}
         </div>
