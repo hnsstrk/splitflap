@@ -82,7 +82,9 @@
 
 .type-toolrow {
   display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: var(--space-s);
+  /* Einheitliche Luft unter der Toolrow auf allen Listenseiten —
+     gleicher ruhiger Rhythmus wie auf der Über-mich-Seite */
+  margin-bottom: var(--space-l);
   font-family: var(--font-ui); font-size: var(--step--2);
   color: var(--text-secondary);
   text-transform: uppercase; letter-spacing: 0.14em;
@@ -132,9 +134,8 @@
 /* ==========================================================================
    A · Editorial Index (Projekte)
    ========================================================================== */
-.editorial-list {
-  border-top: 1px solid var(--border-color);
-}
+/* Kein border-top: die Toolrow darüber zeichnet bereits die Trennlinie —
+   sonst entsteht eine störende Doppellinie */
 .editorial-row {
   display: grid;
   /* Feste Spalten via minmax flexibilisiert, damit sie zwischen 768–900px
@@ -148,16 +149,22 @@
   position: relative;
 }
 .editorial-row:hover {
-  background: color-mix(in srgb, var(--accent-violet) 4%, transparent);
+  background: color-mix(in srgb, var(--type-accent, var(--accent-violet)) 4%, transparent);
 }
 .editorial-row .er-idx {
   font-family: var(--font-heading); font-stretch: 125%;
-  font-weight: 500;
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
   line-height: 0.9;
-  color: var(--text-muted);
+  /* Outline-Ziffern — gleiche Display-Familie wie die Jahres-Trenner im Blog
+     und die Kategorie-Trenner auf der Links-Seite */
+  color: transparent;
+  /* 70 % statt 55 % wie bei yd-num/cd-num: kleinere Ziffern brauchen
+     einen kräftigeren Strich, um sichtbar zu bleiben */
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--text-muted) 70%, transparent);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.08em;
+  user-select: none;
 }
 .editorial-row .er-title {
   font-family: var(--font-heading); font-stretch: 125%;
@@ -172,7 +179,7 @@
   text-decoration: none;
 }
 .editorial-row .er-title:hover {
-  color: var(--accent-violet);
+  color: var(--type-accent, var(--accent-violet));
 }
 .editorial-row .er-title .ext {
   font-family: var(--font-ui);
@@ -281,7 +288,7 @@
   transition: background-color .2s ease;
 }
 .logbook-row:hover {
-  background: color-mix(in srgb, var(--syntax-markup) 4%, transparent);
+  background: color-mix(in srgb, var(--type-accent, var(--syntax-markup)) 4%, transparent);
 }
 .logbook-row .lb-date {
   font-family: var(--font-heading); font-stretch: 125%;
@@ -318,7 +325,7 @@
   display: inline-block;
   border-bottom: none;
 }
-.logbook-row .lb-title:hover { color: var(--syntax-markup); }
+.logbook-row .lb-title:hover { color: var(--type-accent, var(--syntax-markup)); }
 .logbook-row .lb-excerpt {
   font-family: var(--font-body);
   font-style: oblique 8deg;
@@ -337,7 +344,7 @@
   display: inline-flex; gap: var(--space-xs); flex-wrap: wrap;
 }
 .logbook-row .lb-tags .lb-tag-hash {
-  color: var(--syntax-markup);
+  color: var(--type-accent, var(--syntax-markup));
   opacity: 0.7;
   margin-right: 2px;
 }
@@ -372,6 +379,10 @@
   padding: var(--space-xl) 0 0;
   margin-bottom: -8px;
 }
+/* Der erste Jahres-Trenner braucht keinen Vorlauf — die Toolrow gibt die Luft */
+.year-divider:first-child {
+  padding-top: 0;
+}
 .year-divider .yd-num {
   font-family: var(--font-heading); font-stretch: 125%;
   font-weight: 700;
@@ -397,46 +408,49 @@
    C · Adressbuch (Links)
    ========================================================================== */
 .address-block {
-  display: grid;
-  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
-  gap: var(--space-xl);
-  padding: var(--space-l) 0;
+  padding: 0 0 var(--space-l);
   border-bottom: 1px solid var(--border-color);
   position: relative;
 }
-.address-block:first-of-type {
-  border-top: 1px solid var(--border-color);
+.address-block:last-of-type { border-bottom: none; }
+
+/* Kategorie-Trenner — Display-Familie der Jahres-Trenner (Blog):
+   Outline-Ziffer + Name + Subtitle über volle Breite statt schmaler
+   Spalte mit Mehrfach-Umbruch */
+.category-divider {
+  display: flex; align-items: flex-end; gap: var(--space-m);
+  padding: var(--space-xl) 0 var(--space-s);
 }
-.as-title {
+.address-block:first-of-type .category-divider { padding-top: 0; }
+.category-divider .cd-num {
   font-family: var(--font-heading); font-stretch: 125%;
   font-weight: 700;
-  font-size: clamp(32px, 3.6vw, 52px);
-  letter-spacing: -0.06em;
-  line-height: 0.9;
+  font-size: clamp(56px, 7vw, 104px);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--text-muted) 55%, transparent);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+.category-divider .cd-name {
+  font-family: var(--font-heading); font-stretch: 125%;
+  font-weight: 700;
+  font-size: clamp(26px, 2.8vw, 40px);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
   color: var(--text-primary);
-  align-self: start;
+  margin: 0;
 }
-.as-title .as-num {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: var(--step--2);
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--type-accent, var(--accent-text));
-  margin-bottom: var(--space-xs);
-}
-.as-title .as-sub {
-  display: block;
+.category-divider .cd-sub {
   font-family: var(--font-body);
   font-style: oblique 8deg;
   font-weight: 400;
-  font-size: 14px;
+  font-size: var(--step--1);
   color: var(--text-secondary);
-  margin-top: var(--space-xs);
-  letter-spacing: 0;
+  margin: var(--space-3xs) 0 0;
   line-height: 1.55;
-  max-width: 24ch;
+  max-width: 48ch;
 }
 .as-list {
   display: flex; flex-direction: column;
@@ -452,7 +466,7 @@
   transition: background-color .2s ease;
 }
 .as-row:hover {
-  background: color-mix(in srgb, var(--syntax-string) 5%, transparent);
+  background: color-mix(in srgb, var(--type-accent, var(--syntax-string)) 5%, transparent);
 }
 .as-row:last-child { border-bottom: none; }
 .as-row .as-handle {
@@ -465,7 +479,7 @@
   line-height: 1;
   border-bottom: none;
 }
-.as-row .as-handle:hover { color: var(--syntax-string); }
+.as-row .as-handle:hover { color: var(--type-accent, var(--syntax-string)); }
 .as-row .as-handle .as-at {
   color: var(--text-muted);
   font-weight: 400;
@@ -735,9 +749,24 @@
     text-align: left;
   }
 
-  .address-block {
+  .category-divider {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+  }
+  .category-divider .cd-num {
+    font-size: 48px;
+  }
+  /* Lange Handles (z. B. @user@instanz.tld) dürfen umbrechen statt überzulaufen */
+  .as-row {
     grid-template-columns: 1fr;
-    gap: var(--space-m);
+  }
+  .as-row .as-handle {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+  .as-row .as-rail {
+    text-align: left;
   }
   .editorial-related .logbook-row--compact { grid-template-columns: 1fr; }
   .single-meta { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }

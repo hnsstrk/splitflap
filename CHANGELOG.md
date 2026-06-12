@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.0] - 2026-06-12
+
+### Changed
+
+- **Unified display family across list pages** — the project index numbers
+  and the links category dividers now share the outline-numeral style of the
+  blog year dividers (transparent fill, 1px text stroke, tabular numerals).
+- **Links category headers rebuilt** — full-width divider (outline number,
+  category name, italic subtitle) instead of a narrow side column that forced
+  multi-line wrapping of long category names.
+- **Section accent applied consistently** — hover backgrounds, title hovers,
+  and tag hashes on blog, projects, links, and tag pages now use the page's
+  `--type-accent` instead of hardcoded syntax colors.
+- **Calmer hero rhythm** — uniform spacing below the toolrow on all list
+  pages, no more double hairline above the project list, first year divider
+  sits flush.
+
+### Fixed
+
+- Long link handles (e.g. `@user@instance.tld`) overflowing the viewport on
+  small screens — handles now wrap and scale down on mobile.
+
+### Removed
+
+- Orphaned `category` i18n key (the links template no longer renders a
+  category label).
+
 ## [0.1.0] - 2026-06-12
 
 ### Added
@@ -25,8 +52,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   colors; live re-theming on `themechange`; `securityLevel: strict`.
 - **Editorial layouts** — blog with archive and pagination, projects, links
   (data-driven via `data/links.yaml`), tags, and about page. TOC, `callout`,
-  and `tldr` shortcodes. `featured_image` and `featured_layout` support in blog
-  posts and list cards.
+  and `tldr` shortcodes. `featured_image` support in blog posts (rendered
+  above the post, also used for OG meta).
 - **i18n** — German (`de`) and English (`en`) translation files; full coverage
   of all UI strings.
 - **Hardened defaults** — CSP-friendly asset pipeline with subresource
