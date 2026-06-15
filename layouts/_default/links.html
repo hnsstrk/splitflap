@@ -55,7 +55,7 @@
       <div class="as-list">
         {{ range $cat.links }}
           {{ $url       := .url }}
-          {{ $handle    := .handle | default .title }}
+          {{ $handle    := .handle }}
           {{ $isMail    := strings.HasPrefix $url "mailto:" }}
           {{ $host      := "" }}
           {{ if not $isMail }}
@@ -70,19 +70,17 @@
 
           <div class="as-row">
             <div>
-              <a class="as-handle" href="{{ $url }}" {{ if not $isMail }}target="_blank" rel="noopener noreferrer"{{ end }}>
-                {{ if hasPrefix $handle "@" }}
-                  <span class="as-at">@</span>{{ trim $handle "@" }}
-                {{ else }}
-                  {{ $handle }}
-                {{ end }}
+              <a class="as-link" href="{{ $url }}" {{ if not $isMail }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                <span class="nf-icon as-icon">{{ $iconCp | safeHTML }}</span>
+                <span>{{ .title }}</span>
               </a>
               {{ with .description }}<span class="as-desc">{{ . }}</span>{{ end }}
               <span class="as-url">
-                <span class="nf-icon">{{ $iconCp | safeHTML }}</span>
-                <span>{{ $host }}</span>
-                <span class="as-url-dots"></span>
-                <span>{{ .title }}</span>
+                {{ with $handle }}
+                  {{ . }}
+                {{ else }}
+                  {{ $host }}
+                {{ end }}
               </span>
             </div>
             <div class="as-rail">
