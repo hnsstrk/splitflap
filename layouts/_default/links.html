@@ -47,12 +47,9 @@
   {{ range $gi, $cat := $cats }}
     <section class="address-block">
       <h2 class="as-title">
-        {{/* Ziffer + Label im Blog-Datums-Muster (.lb-day / .lb-month):
-             massive Ziffer, darunter das Small-Caps-Label „Kategorie" */}}
+        {{/* Ziffer + Kategoriename im Blog-Datums-Muster (.lb-day / .lb-month) */}}
         <span class="as-num">{{ printf "%02d" (add $gi 1) }}</span>
-        <span class="as-cat-label">{{ i18n "category" }}</span>
-        {{ $cat.name | lower }}
-        {{ with $cat.subtitle }}<span class="as-sub">{{ . }}</span>{{ end }}
+        <span class="as-cat-label">{{ $cat.name }}</span>
       </h2>
 
       <div class="as-list">

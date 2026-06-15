@@ -144,12 +144,15 @@
   gap: var(--space-m);
   padding: var(--space-m) 4px;
   border-bottom: 1px solid var(--border-color);
-  align-items: baseline;
+  align-items: start;
   transition: background-color .2s ease;
   position: relative;
 }
 .editorial-row:hover {
   background: color-mix(in srgb, var(--type-accent, var(--accent-violet)) 4%, transparent);
+}
+.editorial-row .er-idx-wrap {
+  text-align: right;
 }
 /* Ziffer + Kategorie-Label im Blog-Datums-Muster (.lb-date) */
 .editorial-row .er-idx {
@@ -170,9 +173,7 @@
   font-family: var(--font-ui);
   font-size: var(--step--2);
   text-transform: uppercase;
-  /* Etwas enger als lb-month (0.18em): Kategorie-Labels wie PRODUKTIVITÄT
-     sind länger als Monatskürzel und sollen nicht mitten im Wort brechen */
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   font-weight: 500;
   color: var(--text-secondary);
   margin-top: var(--space-2xs);
@@ -262,7 +263,7 @@
    B · Logbuch (Blog)
    ========================================================================== */
 .logbook {
-  border-top: 1px solid var(--border-color);
+  border-top: none;
 }
 .logbook-row {
   display: grid;
@@ -397,25 +398,16 @@
    ========================================================================== */
 .address-block {
   display: grid;
-  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
-  gap: var(--space-xl);
-  padding: var(--space-l) 0;
+  grid-template-columns: minmax(96px, 140px) minmax(0, 1fr);
+  gap: var(--space-m);
+  padding: var(--space-l) 4px;
   border-bottom: 1px solid var(--border-color);
   position: relative;
 }
-.address-block:first-of-type {
-  border-top: 1px solid var(--border-color);
-}
 .as-title {
-  font-family: var(--font-heading); font-stretch: 125%;
-  /* Bewusste Ausnahme vom Titel-Rezept (600/-0.035em): Kategorie-Kopf ist
-     ein Display-Element der Megatitle-Familie, kein Content-Heading */
-  font-weight: 700;
-  font-size: clamp(32px, 3.6vw, 52px);
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-  color: var(--text-primary);
   align-self: start;
+  text-align: right;
+  margin: 0;
 }
 /* Ziffer im Blog-Datums-Muster (.lb-day): massive, solide Ziffer */
 .as-title .as-num {
@@ -428,7 +420,7 @@
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
-/* Small-Caps-Label „Kategorie" unter der Ziffer (.lb-month-Rezept) */
+/* Kategoriename als Small-Caps-Label unter der Ziffer (.lb-month-Rezept) */
 .as-title .as-cat-label {
   display: block;
   font-family: var(--font-ui);
@@ -438,19 +430,6 @@
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-top: var(--space-2xs);
-  margin-bottom: var(--space-s);
-}
-.as-title .as-sub {
-  display: block;
-  font-family: var(--font-body);
-  font-style: oblique 8deg;
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: var(--space-xs);
-  letter-spacing: 0;
-  line-height: 1.55;
-  max-width: 24ch;
 }
 .as-list {
   display: flex; flex-direction: column;
@@ -464,6 +443,9 @@
   margin: 0 calc(-1 * var(--space-xs));
   border-bottom: 1px dashed var(--border-color);
   transition: background-color .2s ease;
+}
+.as-row:first-child {
+  padding-top: 0;
 }
 .as-row:hover {
   background: color-mix(in srgb, var(--type-accent, var(--syntax-string)) 5%, transparent);
@@ -733,6 +715,9 @@
   .editorial-row .er-idx {
     font-size: 36px;
   }
+  .editorial-row .er-idx-wrap {
+    text-align: left;
+  }
   .editorial-row .er-rail {
     text-align: left;
     align-items: flex-start;
@@ -754,6 +739,9 @@
   .address-block {
     grid-template-columns: 1fr;
     gap: var(--space-m);
+  }
+  .as-title {
+    text-align: left;
   }
   /* Lange Handles (z. B. @user@instanz.tld) dürfen umbrechen statt überzulaufen */
   .as-row {
