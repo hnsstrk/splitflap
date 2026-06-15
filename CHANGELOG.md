@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.0] - 2026-06-15
+
+### Changed
+
+- **Links page reworked into a platform-led list** — the address-block
+  category header now carries the platform/category name directly next to the
+  numeral (dropping the generic "category" label and the subtitle line), and
+  each link row leads with the platform icon and the entry title, with the
+  handle (or host as fallback) moving underneath. The previous handle-first
+  layout (`@user@instance` rail, host-dots-title line) is replaced.
+- **List grid and link categories unified** — the project index and the links
+  address book share one grid rhythm and one category-heading treatment.
+
+### Removed
+
+- The `category` i18n label usage in the links template (the platform name now
+  heads each block).
+
 ## [0.3.1] - 2026-06-12
 
 ### Changed
