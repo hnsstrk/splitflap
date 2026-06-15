@@ -403,6 +403,10 @@
   padding: var(--space-l) 4px;
   border-bottom: 1px solid var(--border-color);
   position: relative;
+  transition: background-color .2s ease;
+}
+.address-block:hover {
+  background: color-mix(in srgb, var(--type-accent, var(--syntax-string)) 4%, transparent);
 }
 .as-title {
   align-self: start;
@@ -442,13 +446,9 @@
   padding: var(--space-s) var(--space-xs);
   margin: 0 calc(-1 * var(--space-xs));
   border-bottom: 1px dashed var(--border-color);
-  transition: background-color .2s ease;
 }
 .as-row:first-child {
   padding-top: 0;
-}
-.as-row:hover {
-  background: color-mix(in srgb, var(--type-accent, var(--syntax-string)) 5%, transparent);
 }
 .as-row:last-child { border-bottom: none; }
 .as-row .as-link {
