@@ -101,14 +101,17 @@
   --spacing-xl: var(--space-xl);
 
   /* Lesemaße — eine zentrale Quelle für alle Spaltenbreiten.
-     Bei Monospace gilt 1ch ≈ 1 Zeichen, --measure 72ch ≈ 72 Zeichen/Zeile
-     (oberer Rand des 66–75-Korridors). Fließtext UND texttragende Boxen
-     (Code, Callout, TL;DR, TOC, Zitat) teilen --measure und damit denselben
-     linken/rechten Rand. Rein visuelle Blöcke (Bilder, Tabellen, Diagramme)
-     dürfen bis --measure-wide laufen — am selben linken Rand verankert,
-     auf Mobile automatisch 100 %. --measure-short: kurze Einleitungs-/
-     Auszugstexte (Lede, Listen-Beschreibungen). */
-  --measure: 72ch;
+     ABSOLUT (rem), NICHT ch: --measure wird von Elementen mit sehr
+     unterschiedlichen Font-Größen geteilt (Meta-Leiste in --step--2 vs.
+     Body in --step-0). ch ist font-size-relativ und ergäbe pro Element eine
+     andere Pixelbreite — Leiste und Body würden nicht fluchten. 54rem ≈ 864px
+     ≈ ~70 Zeichen Body-Text (im 66–75-Korridor), für ALLE Elemente identisch.
+     Fließtext UND texttragende Boxen (Code, Callout, TL;DR, TOC, Zitat) teilen
+     --measure und damit exakt denselben linken/rechten Rand. Rein visuelle
+     Blöcke (Bilder, Tabellen, Diagramme) dürfen bis --measure-wide laufen,
+     symmetrisch zentriert. min(100%, …) verhindert Mobile-Overflow.
+     --measure-short: kurze Einleitungs-/Auszugstexte auf Listenseiten. */
+  --measure: min(100%, 54rem);
   --measure-wide: min(100%, 60rem);
   --measure-short: 58ch;
 

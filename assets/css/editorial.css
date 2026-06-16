@@ -531,8 +531,8 @@
 /* Manuskript-Säule — Artikelseiten als zentrierte Lese-Zone.
    Alle direkten Kinder des Artikel-Containers teilen zwei gemeinsame Achsen,
    beide im 1200px-Container zentriert:
-     · Text-Tier (--measure 72ch): eyebrow, lede, Toolrow/hr, TOC, Tags,
-       Related — gleiche linke UND rechte Kante wie der Body-Text.
+     · Text-Tier (--measure, absolut ~54rem): eyebrow, lede, Toolrow/hr, TOC,
+       Tags, Related — gleiche linke UND rechte Kante wie der Body-Text.
      · Display-Tier (--measure-wide 960px): Titel, Featured-Image, Figures —
        symmetrisch ~48px breiter, als bewusste Display-Geste.
    Behebt die Breiten-Diskrepanz (hr = Body-Breite) und das Links-Kippen.
