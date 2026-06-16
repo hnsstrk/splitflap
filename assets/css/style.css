@@ -6,8 +6,9 @@
   --bg-tertiary: #fafafa;
 
   --text-primary: #5c6166;
-  --text-secondary: #828e9f;
-  --text-muted: #adaeb1;
+  /* AA-konform auf --bg-primary (#fcfcfc): secondary ~4,5:1, muted ~4,6:1 */
+  --text-secondary: #6b7585;
+  --text-muted: #6f7174;
 
   --accent-primary: #f29718;
   --accent-hover: #e08614;
@@ -99,6 +100,18 @@
   --spacing-lg: var(--space-l);
   --spacing-xl: var(--space-xl);
 
+  /* Lesemaße — eine zentrale Quelle für alle Spaltenbreiten.
+     Bei Monospace gilt 1ch ≈ 1 Zeichen, --measure 72ch ≈ 72 Zeichen/Zeile
+     (oberer Rand des 66–75-Korridors). Fließtext UND texttragende Boxen
+     (Code, Callout, TL;DR, TOC, Zitat) teilen --measure und damit denselben
+     linken/rechten Rand. Rein visuelle Blöcke (Bilder, Tabellen, Diagramme)
+     dürfen bis --measure-wide laufen — am selben linken Rand verankert,
+     auf Mobile automatisch 100 %. --measure-short: kurze Einleitungs-/
+     Auszugstexte (Lede, Listen-Beschreibungen). */
+  --measure: 72ch;
+  --measure-wide: min(100%, 60rem);
+  --measure-short: 58ch;
+
   /* Header-Höhe */
   --header-height: clamp(56px, 7vw, 80px);
 
@@ -124,8 +137,9 @@
   --bg-tertiary: #282e3b;
 
   --text-primary: #cccac2;
-  --text-secondary: #707a8c;
-  --text-muted: #6e7c8f;
+  /* AA-konform auf --bg-primary (#242936): secondary/muted ~4,6:1 */
+  --text-secondary: #8b95a8;
+  --text-muted: #8590a3;
 
   --accent-primary: #ffcc66;
   --accent-hover: #e6b84d;
@@ -189,8 +203,9 @@
   --bg-tertiary: #141821;
 
   --text-primary: #bfbdb6;
-  --text-secondary: #5a6378;
-  --text-muted: #565b66;
+  /* AA-konform auf --bg-primary (#0d1017): secondary/muted ~4,6:1 */
+  --text-secondary: #7c8598;
+  --text-muted: #7e8694;
 
   --accent-primary: #e6b450;
   --accent-hover: #cc9f3d;
@@ -335,11 +350,18 @@ h3 + h4 { margin-top: var(--spacing-md); }
 h4 + h5 { margin-top: var(--spacing-sm); }
 h5 + h6 { margin-top: var(--spacing-sm); }
 
-/* Erstes Heading im Content: kein margin-top */
-.markdown-content > h2:first-child,
-.markdown-content > h3:first-child,
-.markdown-content > h4:first-child {
+/* Erstes/letztes Element im Content: keine überstehenden Außenabstände,
+   damit der Abstand zum Single-Header bzw. zur Tag-/Related-Trennlinie
+   allein von den umgebenden Komponenten bestimmt wird (reproduzierbar,
+   unabhängig vom Typ des ersten/letzten Content-Elements).
+   Die verdoppelte Klasse hebt die Spezifität auf (0,2,1), damit der Reset
+   auch element-/klassenspezifische Block-Margins (ul/ol, figure, .table-wrap)
+   sicher überschreibt — sonst greift er genau dort nicht. */
+.markdown-content.markdown-content > :first-child {
   margin-top: 0;
+}
+.markdown-content.markdown-content > :last-child {
+  margin-bottom: 0;
 }
 
 p {
@@ -391,7 +413,7 @@ blockquote, .emphasis {
   font-size: var(--step-2);
   color: var(--text-secondary);
   padding: var(--space-s) var(--space-l);
-  margin: var(--space-l) var(--space-m);
+  margin: var(--space-l) 0;
   background-color: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
   border-radius: 4px;
 }
@@ -712,21 +734,31 @@ code {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--spacing-sm);
 }
-/* Fließtext auf lesbare Zeilenlänge begrenzen (~70 Zeichen, konsistent zur
-   .type-lede). Greift auf texttragende Elemente — Code-Blöcke, Tabellen,
-   Bilder und Figures dürfen weiterhin die volle Containerbreite nutzen. */
+/* Lesemaß: Fließtext UND texttragende Boxen teilen --measure und damit
+   denselben linken/rechten Rand — keine Breiten-Asymmetrie mehr zwischen
+   Absatz und nebenstehendem Code-/Callout-/TL;DR-Block. */
 .markdown-content > p,
 .markdown-content > ul,
 .markdown-content > ol,
 .markdown-content > dl,
 .markdown-content > blockquote,
+.markdown-content > pre,
 .markdown-content > h1,
 .markdown-content > h2,
 .markdown-content > h3,
 .markdown-content > h4,
 .markdown-content > h5,
-.markdown-content > h6 {
-  max-width: 72ch;
+.markdown-content > h6,
+.markdown-content > .callout,
+.markdown-content > .tldr {
+  max-width: var(--measure);
+}
+/* Rein visuelle Blöcke dürfen etwas breiter laufen, bleiben aber am selben
+   linken Rand verankert (kein zentriertes Ausbrechen). */
+.markdown-content > figure,
+.markdown-content > .table-wrap,
+.markdown-content > .mermaid {
+  max-width: var(--measure-wide);
 }
 .markdown-content ul, .markdown-content ol {
   margin-left: var(--spacing-lg);
@@ -737,10 +769,16 @@ code {
 }
 
 /* Tables */
+/* Scroll-Container — breite Tabellen scrollen horizontal innerhalb des
+   Lesemaßes statt den Viewport zu sprengen (Mobile). */
+.markdown-content .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--spacing-lg);
+}
 .markdown-content table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: var(--spacing-lg);
   font-family: var(--font-ui);
   font-size: var(--step--1);
 }
@@ -781,13 +819,20 @@ code {
 .markdown-content figure {
   margin: var(--spacing-lg) 0;
 }
+/* Im Figure-Kontext liefert die figure den Außenabstand — das Bild selbst
+   bekommt keinen vertikalen Margin, sonst klafft eine Lücke zur Caption. */
+.markdown-content figure img {
+  margin: 0 auto;
+}
 
 .markdown-content figcaption {
-  font-size: var(--step--1);
+  font-size: max(var(--step--1), 0.85rem);
   font-family: var(--font-handwriting);
   font-style: oblique 6deg;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  margin-top: var(--space-2xs);
+  line-height: 1.4;
 }
 
 /* --- Semantische Inline-Elemente --- */
@@ -1187,6 +1232,9 @@ code {
    ========================================================================== */
 
 .toc {
+  /* Das TOC liegt außerhalb von .markdown-content (eigenes Partial), wird
+     aber aufs Lesemaß begrenzt, damit es bündig zum Artikel-Body steht. */
+  max-width: var(--measure);
   margin: 0 0 var(--spacing-xl);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
