@@ -752,16 +752,20 @@ code {
 .markdown-content > h4,
 .markdown-content > h5,
 .markdown-content > h6,
+.markdown-content > hr,
 .markdown-content > .callout,
 .markdown-content > .tldr {
   max-width: var(--measure);
   margin-inline: auto;
 }
-/* Visuelle Blöcke teilen dieselbe Achse wie der Text — eine Spalte, eine
-   Kante. Zu breite Tabellen/Diagramme scrollen horizontal (overflow-x). */
+/* Visuelle Blöcke und Wrapper teilen dieselbe Achse wie der Text — eine
+   Spalte, eine Kante. .highlight ist der Chroma-Codeblock-Wrapper (direkter
+   Kind statt des inneren pre). Zu breite Tabellen/Diagramme/Codezeilen
+   scrollen horizontal (overflow-x). */
 .markdown-content > figure,
 .markdown-content > .table-wrap,
-.markdown-content > .mermaid {
+.markdown-content > .mermaid,
+.markdown-content > .highlight {
   max-width: var(--measure);
   margin-inline: auto;
 }
@@ -823,8 +827,11 @@ code {
 }
 
 /* Figures */
+/* margin-block (nicht margin-Shorthand!) — sonst würde margin-inline:0 das
+   margin-inline:auto der Measure-Regel überschreiben und die Figure links-
+   bündig statt zentriert setzen. */
 .markdown-content figure {
-  margin: var(--spacing-lg) 0;
+  margin-block: var(--spacing-lg);
 }
 /* Im Figure-Kontext liefert die figure den Außenabstand — das Bild selbst
    bekommt keinen vertikalen Margin, sonst klafft eine Lücke zur Caption. */
@@ -860,7 +867,9 @@ code {
 /* --- Definitionslisten --- */
 
 .markdown-content dl {
-    margin: var(--spacing-md) 0;
+    /* margin-block, nicht Shorthand — erhält margin-inline:auto der
+       Measure-Regel (sonst linksbündig). */
+    margin-block: var(--spacing-md);
 }
 
 .markdown-content dt {
