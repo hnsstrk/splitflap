@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.2] - 2026-06-16
+
+### Fixed
+
+- **Article pages now read as a centered manuscript column** — the meta
+  toolrow (the horizontal divider), the title and the body text previously sat
+  at different widths with the body left-aligned, so the divider ran much wider
+  than the text and the whole page leaned left. Article pages now bind every
+  element to a centered reading zone: text-bearing elements (eyebrow, lede,
+  toolrow/divider, TOC, tags, related) share the body measure, while display
+  elements (title, featured image, figures, tables, diagrams) extend
+  symmetrically to the wider display measure. The divider now matches the text
+  width and the column is centered. Scoped via a new `.type-article` class on
+  the single/about layouts, so the full-width list grids on index pages are
+  unaffected.
+
+### Changed
+
+- The lede on article pages uses the body measure, aligning its left edge with
+  the text column.
+- List markers indent via `padding-left` so list blocks center cleanly within
+  the reading column.
+
 ## [0.4.1] - 2026-06-16
 
 ### Fixed
