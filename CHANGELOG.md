@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.4] - 2026-06-16
+
+### Changed
+
+- **Article pages collapse to a single reading column** — 0.4.2/0.4.3 used a
+  two-tier system where display elements (title, featured image, figures,
+  tables, diagrams) sat about 48px wider on each side than the text elements,
+  producing a staggered left edge in both the header (title vs. eyebrow, lede
+  and meta bar) and the body (tables/diagrams vs. text). Every article element
+  now shares one measure, so the title, lede, meta bar/divider, body text,
+  code, callouts, images, tables and diagrams all line up on a single clean
+  edge. Wide tables and diagrams scroll horizontally within that column.
+
+### Removed
+
+- The `--measure-wide` token, now that the article column is single-tier.
+
 ## [0.4.3] - 2026-06-16
 
 ### Fixed
