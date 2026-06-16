@@ -529,18 +529,18 @@
    ========================================================================== */
 
 /* Manuskript-Säule — Artikelseiten als zentrierte Lese-Zone.
-   Alle direkten Kinder des Artikel-Containers teilen zwei gemeinsame Achsen,
-   beide im 1200px-Container zentriert:
-     · Text-Tier (--measure, absolut ~54rem): eyebrow, lede, Toolrow/hr, TOC,
-       Tags, Related — gleiche linke UND rechte Kante wie der Body-Text.
-     · Display-Tier (--measure-wide 960px): Titel, Featured-Image, Figures —
-       symmetrisch ~48px breiter, als bewusste Display-Geste.
+   ALLE direkten Kinder des Artikel-Containers teilen EINE gemeinsame Achse
+   (--measure), im 1200px-Container zentriert: eyebrow, Titel, lede, Toolrow/hr,
+   TOC, Featured-Image, Tags, Related — exakt dieselbe linke UND rechte Kante
+   wie der Body-Text. Eine einzige Spalte, kein Tier-Versatz.
    Behebt die Breiten-Diskrepanz (hr = Body-Breite) und das Links-Kippen.
    Gescopt auf .type-article (NICHT .type-page — das trägt auch die
    vollbreiten Listenraster der Index-Seiten). */
 .type-article > .type-lede,
 .type-article > .type-toolrow,
 .type-article > .toc,
+.type-article > .type-megatitle,
+.type-article > .featured-image,
 .type-article > .single-tags,
 .type-article > .editorial-related {
   max-width: var(--measure);
@@ -550,11 +550,6 @@
 .type-article > .type-eyebrow {
   display: flex;
   max-width: var(--measure);
-  margin-inline: auto;
-}
-.type-article > .type-megatitle,
-.type-article > .featured-image {
-  max-width: var(--measure-wide);
   margin-inline: auto;
 }
 

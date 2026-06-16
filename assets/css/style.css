@@ -106,13 +106,13 @@
      Body in --step-0). ch ist font-size-relativ und ergäbe pro Element eine
      andere Pixelbreite — Leiste und Body würden nicht fluchten. 54rem ≈ 864px
      ≈ ~70 Zeichen Body-Text (im 66–75-Korridor), für ALLE Elemente identisch.
-     Fließtext UND texttragende Boxen (Code, Callout, TL;DR, TOC, Zitat) teilen
-     --measure und damit exakt denselben linken/rechten Rand. Rein visuelle
-     Blöcke (Bilder, Tabellen, Diagramme) dürfen bis --measure-wide laufen,
-     symmetrisch zentriert. min(100%, …) verhindert Mobile-Overflow.
+     EINE Achse: Fließtext, texttragende Boxen (Code, Callout, TL;DR, TOC,
+     Zitat) UND visuelle Blöcke (Bilder, Tabellen, Diagramme) teilen --measure
+     und damit exakt dieselbe linke/rechte Kante — eine einzige Spalte, kein
+     Tier-Versatz. Zu breite Tabellen/Diagramme scrollen via overflow-x.
+     min(100%, …) verhindert Mobile-Overflow.
      --measure-short: kurze Einleitungs-/Auszugstexte auf Listenseiten. */
   --measure: min(100%, 54rem);
-  --measure-wide: min(100%, 60rem);
   --measure-short: 58ch;
 
   /* Header-Höhe */
@@ -757,12 +757,12 @@ code {
   max-width: var(--measure);
   margin-inline: auto;
 }
-/* Rein visuelle Blöcke dürfen etwas breiter laufen — symmetrisch zentriert
-   auf dieselbe Achse wie der Text (Display-Tier der Manuskript-Säule). */
+/* Visuelle Blöcke teilen dieselbe Achse wie der Text — eine Spalte, eine
+   Kante. Zu breite Tabellen/Diagramme scrollen horizontal (overflow-x). */
 .markdown-content > figure,
 .markdown-content > .table-wrap,
 .markdown-content > .mermaid {
-  max-width: var(--measure-wide);
+  max-width: var(--measure);
   margin-inline: auto;
 }
 .markdown-content ul, .markdown-content ol {
