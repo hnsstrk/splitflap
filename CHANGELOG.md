@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.3] - 2026-06-16
+
+### Fixed
+
+- **Reading column now aligns across all article elements** — 0.4.2 bound the
+  article column to `--measure: 72ch`, but `ch` is font-size-relative: the
+  small-type meta bar resolved 72ch to roughly 570px while the body text
+  resolved it to roughly 860px, so the divider and meta bar ended up far
+  narrower than the text and the elements no longer lined up. `--measure` is
+  now an absolute width (`min(100%, 54rem)`), so the eyebrow, lede, meta
+  bar/divider, TOC, tags, related list and body text all share the exact same
+  width and edges regardless of their font size. The display tier
+  (`--measure-wide`) stays 60rem, symmetrically wider for title and visuals.
+
 ## [0.4.2] - 2026-06-16
 
 ### Fixed
