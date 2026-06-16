@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.1] - 2026-06-16
+
+### Fixed
+
+- **Body text and embedded blocks now share one reading measure** — previously
+  only paragraphs and headings were capped while code blocks, callouts, TL;DR
+  boxes, tables and figures ran to the full container width, leaving the text
+  column visibly narrower than everything around it. A central `--measure`
+  token now governs body text and text-bearing boxes (code, callout, TL;DR,
+  blockquote) so they share the same left and right edge; purely visual blocks
+  (images, tables, diagrams) may extend to `--measure-wide`.
+- **Figure captions sit directly under their image** — the image's bottom
+  margin inside a `<figure>` was pushing the caption far below; the caption now
+  carries its own small top margin instead.
+- **Text contrast meets WCAG AA** — `--text-secondary` and `--text-muted` were
+  below 4.5:1 on the page background in all three themes and are raised to AA
+  across Light, Mirage and Dark.
+- Blockquotes align to the body measure (the horizontal margin that made them
+  narrower than the surrounding text is removed); the first and last content
+  element no longer leak outer margins into the surrounding layout.
+
+### Added
+
+- **Table render hook** wrapping tables in a horizontally scrollable container
+  so wide tables scroll within the reading measure instead of overflowing the
+  viewport on small screens.
+- Reading-measure tokens (`--measure`, `--measure-wide`, `--measure-short`) as
+  a single source for column widths; the four previously hard-coded measures
+  (54/58/72ch) are consolidated onto them.
+
+### Changed
+
+- Heading anchor links become visible on keyboard focus, not only on hover.
+- Long link URLs and handles wrap instead of overflowing the links grid.
+
 ## [0.4.0] - 2026-06-15
 
 ### Changed
