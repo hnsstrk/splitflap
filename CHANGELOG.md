@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.5] - 2026-06-16
+
+### Fixed
+
+- **Code blocks, images, definition lists and horizontal rules now align with
+  the text column** — several block elements escaped the article's reading
+  measure: syntax-highlighted code blocks (which Chroma wraps in a
+  `div.highlight`, the actual top-level child) ran the full container width;
+  figures/images and definition lists were the correct width but pinned to the
+  left container edge instead of centered, because a `margin` shorthand reset
+  the `margin-inline: auto`; and `<hr>` had no measure at all. All four now
+  share the single centered reading column as the rest of the article.
+
 ## [0.4.4] - 2026-06-16
 
 ### Changed
