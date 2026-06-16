@@ -528,6 +528,36 @@
    D · Single-Anpassungen (blog/single.html, _default/single.html)
    ========================================================================== */
 
+/* Manuskript-Säule — Artikelseiten als zentrierte Lese-Zone.
+   Alle direkten Kinder des Artikel-Containers teilen zwei gemeinsame Achsen,
+   beide im 1200px-Container zentriert:
+     · Text-Tier (--measure 72ch): eyebrow, lede, Toolrow/hr, TOC, Tags,
+       Related — gleiche linke UND rechte Kante wie der Body-Text.
+     · Display-Tier (--measure-wide 960px): Titel, Featured-Image, Figures —
+       symmetrisch ~48px breiter, als bewusste Display-Geste.
+   Behebt die Breiten-Diskrepanz (hr = Body-Breite) und das Links-Kippen.
+   Gescopt auf .type-article (NICHT .type-page — das trägt auch die
+   vollbreiten Listenraster der Index-Seiten). */
+.type-article > .type-lede,
+.type-article > .type-toolrow,
+.type-article > .toc,
+.type-article > .single-tags,
+.type-article > .editorial-related {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+/* eyebrow ist display:inline-flex — für margin-auto als Block nötig: */
+.type-article > .type-eyebrow {
+  display: flex;
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+.type-article > .type-megatitle,
+.type-article > .featured-image {
+  max-width: var(--measure-wide);
+  margin-inline: auto;
+}
+
 /* Mega-Title bei Single-Pages: deutlich kompakter als Listen-Index,
    weil hier ganze Sätze stehen, keine Einzelworte wie "blog." */
 .type-megatitle.single-megatitle {

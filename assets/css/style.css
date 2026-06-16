@@ -752,16 +752,20 @@ code {
 .markdown-content > .callout,
 .markdown-content > .tldr {
   max-width: var(--measure);
+  margin-inline: auto;
 }
-/* Rein visuelle Blöcke dürfen etwas breiter laufen, bleiben aber am selben
-   linken Rand verankert (kein zentriertes Ausbrechen). */
+/* Rein visuelle Blöcke dürfen etwas breiter laufen — symmetrisch zentriert
+   auf dieselbe Achse wie der Text (Display-Tier der Manuskript-Säule). */
 .markdown-content > figure,
 .markdown-content > .table-wrap,
 .markdown-content > .mermaid {
   max-width: var(--measure-wide);
+  margin-inline: auto;
 }
 .markdown-content ul, .markdown-content ol {
-  margin-left: var(--spacing-lg);
+  /* padding statt margin: lässt den zentrierten Listenblock (margin-inline:auto)
+     intakt und rückt nur die Marker ein. */
+  padding-left: var(--spacing-lg);
   margin-bottom: var(--spacing-md);
 }
 .markdown-content li {

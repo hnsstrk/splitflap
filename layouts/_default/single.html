@@ -14,7 +14,7 @@
 
 {{ $accent := cond $isProject "var(--syntax-constant)" "var(--accent-primary)" }}
 
-<div class="container type-page animate-fade-in" style="--type-accent: {{ $accent | safeCSS }};">
+<div class="container type-page type-article animate-fade-in" style="--type-accent: {{ $accent | safeCSS }};">
   <span class="type-eyebrow"><span class="te-dot"></span>
     {{ if $isProject }}{{ i18n "eyebrowProject" }}{{ with .Params.category }} · {{ . | lower }}{{ end }}{{ else }}{{ .Section | lower }}{{ end }}
   </span>
